@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height>Content Here</v-container>
+  <div>Login</div>
 </template>
 
 <script>
@@ -30,12 +30,6 @@ export default {
     /**
      * all the methods here
      */
-  },
-  head: {
-    /**
-     * all the header here
-     */
-    title: 'Home'
   }
 }
 </script>

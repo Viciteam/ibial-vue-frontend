@@ -1,13 +1,27 @@
 <template>
-  <v-app>
-    <v-main>
+  <v-app id="app">
+    <Header />
+
+    <v-main class="accent">
       <nuxt />
     </v-main>
+
+    <Authentication />
   </v-app>
 </template>
 
 <script>
+import { Header } from '~/components/header'
+import { Authentication } from '~/components/authentication'
+
 export default {
+  components: {
+    /**
+     * all the components here
+     */
+    Header,
+    Authentication
+  },
   data() {
     return {
       /**
