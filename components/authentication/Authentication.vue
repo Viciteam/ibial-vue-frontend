@@ -1,8 +1,6 @@
 <template>
-  <v-dialog v-model="dialog" max-width="290">
-    <v-card>
-      Authentication
-
+  <v-dialog v-model="dialog" width="450">
+    <v-card class="pa-10">
       <Register />
     </v-card>
   </v-dialog>
