@@ -3,7 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 
 export default {
-  mode: 'universal',
+  target: 'static',
+  mode: 'spa',
   server: {
     port: process.env.APP_PORT,
     host: process.env.APP_HOST
@@ -23,7 +24,13 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Poppins&display=swap'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -32,7 +39,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/global.css'],
   /*
    ** Plugins to load before mounting the App
    */
