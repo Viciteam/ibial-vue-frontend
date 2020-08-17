@@ -55,8 +55,22 @@
     </div>
 
     <v-text-field color="primary" placeholder="Email"></v-text-field>
-    <v-text-field color="primary" placeholder="Password"></v-text-field>
-    <v-text-field color="primary" placeholder="Confirm Password"></v-text-field>
+    <v-text-field
+      color="primary"
+      placeholder="Password"
+      name="input-10-1"
+      :type="isHidePassword ? 'text' : 'password'"
+      :append-icon="isHidePassword ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:append="isHidePassword = !isHidePassword"
+    ></v-text-field>
+    <v-text-field
+      color="primary"
+      placeholder="Confirm Password"
+      name="input-10-1"
+      :type="isHideConfirmPassword ? 'text' : 'password'"
+      :append-icon="isHideConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:append="isHideConfirmPassword = !isHideConfirmPassword"
+    ></v-text-field>
 
     <div>
       <v-checkbox label="I agree to the Terms and Conditions."></v-checkbox>
@@ -84,6 +98,8 @@ export default {
       /**
        * all the datas here
        */
+      isHidePassword: false,
+      isHideConfirmPassword: false
     }
   },
   computed: {

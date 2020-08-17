@@ -1,6 +1,11 @@
 <template>
   <v-dialog v-model="dialog" width="450">
     <v-card class="pa-10">
+      <v-row no-gutters>
+        <v-spacer></v-spacer>
+        <v-btn icon color="primary"><v-icon>mdi-close</v-icon></v-btn>
+      </v-row>
+
       <Register />
     </v-card>
   </v-dialog>
