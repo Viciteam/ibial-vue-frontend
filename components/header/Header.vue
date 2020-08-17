@@ -1,5 +1,7 @@
 <template>
-  <v-container fill-height>Content Here</v-container>
+  <v-app-bar app flat color="white">
+    <v-toolbar-title>iBial</v-toolbar-title>
+  </v-app-bar>
 </template>
 
 <script>

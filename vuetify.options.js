@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 
 export default {
   theme: {
@@ -8,7 +8,7 @@ export default {
         primary: '#4DB7A1',
         secondary: '#44599D',
         black: '#333333',
-        accent: '#F2F2F2',
+        accent: '#F7F7F7',
         gray: '#DFDFE1',
         medium_gray: '#A0A8B0',
         dark_gray: '#596366',
@@ -21,7 +21,7 @@ export default {
         primary: '#4DB7A1',
         secondary: '#44599D',
         black: '#333333',
-        accent: '#F2F2F2',
+        accent: '#F7F7F7',
         gray: '#DFDFE1',
         medium_gray: '#A0A8B0',
         dark_gray: '#596366',

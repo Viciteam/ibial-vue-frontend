@@ -1,14 +1,27 @@
 <template>
-  <v-container fill-height>Content Here</v-container>
+  <v-dialog v-model="dialog" width="450">
+    <v-card class="pa-10">
+      <Register />
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
+import { Register } from './dialog'
+
 export default {
+  components: {
+    /**
+     * all the datas here
+     */
+    Register
+  },
   data() {
     return {
       /**
        * all the datas here
        */
+      dialog: true
     }
   },
   computed: {
@@ -30,12 +43,6 @@ export default {
     /**
      * all the methods here
      */
-  },
-  head: {
-    /**
-     * all the header here
-     */
-    title: 'Home'
   }
 }
 </script>
