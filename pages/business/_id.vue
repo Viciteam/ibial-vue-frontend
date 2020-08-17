@@ -1,26 +1,17 @@
 <template>
-  <v-app id="app">
+  <div>
+    <!-- Need atleast one element inside <template> -->
     <Header />
-
-    <v-main class="accent">
-      <nuxt />
-    </v-main>
-
-    <Authentication v-if="$route.name === 'index'" />
-  </v-app>
+    <!-- /components/header -->
+  </div>
 </template>
 
 <script>
-import { Header } from '~/components/header'
-import { Authentication } from '~/components/authentication'
+import { Header } from '~/components/business'
 
 export default {
   components: {
-    /**
-     * all the components here
-     */
-    Header,
-    Authentication
+    Header
   },
   data() {
     return {
