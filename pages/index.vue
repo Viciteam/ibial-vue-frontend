@@ -30,6 +30,12 @@ export default {
     /**
      * all the methods here
      */
+  },
+  head: {
+    /**
+     * all the header here
+     */
+    title: 'Home'
   }
 }
 </script>
