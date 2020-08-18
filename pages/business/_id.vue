@@ -1,32 +1,23 @@
 <template>
-  <v-dialog v-model="dialog" width="450">
-    <v-card class="pa-10">
-      <v-row no-gutters>
-        <v-spacer></v-spacer>
-        <v-btn icon color="primary"><v-icon>mdi-close</v-icon></v-btn>
-      </v-row>
-
-      <Register />
-    </v-card>
-  </v-dialog>
+  <div>
+    <!-- Need atleast one element inside <template> -->
+    <Header />
+    <!-- /components/header -->
+  </div>
 </template>
 
 <script>
-import { Register } from './dialog'
+import { Header } from '~/components/business'
 
 export default {
   components: {
-    /**
-     * all the datas here
-     */
-    Register
+    Header
   },
   data() {
     return {
       /**
        * all the datas here
        */
-      dialog: true
     }
   },
   computed: {

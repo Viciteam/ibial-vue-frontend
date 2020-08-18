@@ -6,7 +6,7 @@
       <nuxt />
     </v-main>
 
-    <Authentication />
+    <Authentication v-if="$route.name === 'index'" />
   </v-app>
 </template>
 

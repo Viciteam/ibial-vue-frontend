@@ -1,18 +1,20 @@
 <template>
-  <div class="px-5">
-    <v-card-text class="font-weight-bold text-h5 black--text text-center">
+  <div :class="{ 'px-5': $vuetify.breakpoint.smAndUp }">
+    <v-card-text class="font-weight-semi-bold text-h5 black--text text-center">
       Sign up to iBial
     </v-card-text>
 
     <div class="text-center">
       Already have an account?
-      <span class="primary--text font-weight-bold">Sign in</span>
+      <a href="#" class="primary--text font-weight-medium text-decoration-none"
+        >Sign in</a
+      >
     </div>
 
     <div class="mt-7">
       <v-btn
         rounded
-        class="text-capitalize no-transform mb-3"
+        class="text-capitalize text-decoration-none mb-3"
         block
         large
         depressed
@@ -22,7 +24,7 @@
       </v-btn>
       <v-btn
         rounded
-        class="text-capitalize no-transform white--text"
+        class="text-capitalize text-decoration-none white--text"
         color="#006699"
         block
         large
@@ -53,8 +55,22 @@
     </div>
 
     <v-text-field color="primary" placeholder="Email"></v-text-field>
-    <v-text-field color="primary" placeholder="Password"></v-text-field>
-    <v-text-field color="primary" placeholder="Confirm Password"></v-text-field>
+    <v-text-field
+      color="primary"
+      placeholder="Password"
+      name="input-10-1"
+      :type="isHidePassword ? 'text' : 'password'"
+      :append-icon="isHidePassword ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:append="isHidePassword = !isHidePassword"
+    ></v-text-field>
+    <v-text-field
+      color="primary"
+      placeholder="Confirm Password"
+      name="input-10-1"
+      :type="isHideConfirmPassword ? 'text' : 'password'"
+      :append-icon="isHideConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:append="isHideConfirmPassword = !isHideConfirmPassword"
+    ></v-text-field>
 
     <div>
       <v-checkbox label="I agree to the Terms and Conditions."></v-checkbox>
@@ -62,7 +78,8 @@
 
     <div class="text-center mt-2">
       <v-btn
-        width="300"
+        :width="$vuetify.breakpoint.smAndUp ? '300' : ''"
+        :block="$vuetify.breakpoint.xsOnly"
         class="text-capitalize font-weight-semibold"
         color="primary"
         rounded
@@ -81,6 +98,8 @@ export default {
       /**
        * all the datas here
        */
+      isHidePassword: false,
+      isHideConfirmPassword: false
     }
   },
   computed: {
