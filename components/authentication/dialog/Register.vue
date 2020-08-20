@@ -20,6 +20,10 @@
         depressed
         outlined
       >
+        <v-avatar size="17" class="mr-4">
+          <v-img src="/icons/google.png"></v-img>
+        </v-avatar>
+
         Continue <span class="text-lowercase px-1">with</span> Google
       </v-btn>
       <v-btn
@@ -30,6 +34,9 @@
         large
         depressed
       >
+        <v-avatar size="17" class="mr-4 mb-1" tile color="transparent">
+          <v-img src="/icons/linkedin.png"></v-img>
+        </v-avatar>
         Continue <span class="text-lowercase px-1">with</span> LinkedIn
       </v-btn>
     </div>
