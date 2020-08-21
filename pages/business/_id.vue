@@ -1,17 +1,40 @@
 <template>
   <div>
     <!-- Need atleast one element inside <template> -->
-    <Header />
-    <!-- /components/header -->
+    <v-container fluid class="mx-auto">
+      <v-row>
+        <v-col>
+          <Header />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <Overview />
+        </v-col>
+        <v-col>
+          <Featured class="mb-10" />
+          <MyConnection />
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- 
+      /components/Header
+      /components/Overview
+      /components/Featured
+      /components/MyConnection
+    -->
   </div>
 </template>
 
 <script>
-import { Header } from '~/components/business'
+import { Header, Overview, Featured, MyConnection } from '~/components/business'
 
 export default {
   components: {
-    Header
+    Header,
+    Overview,
+    Featured,
+    MyConnection
   },
   data() {
     return {
