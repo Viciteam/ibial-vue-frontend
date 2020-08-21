@@ -7,6 +7,7 @@ export default {
       light: {
         primary: '#4DB7A1',
         secondary: '#44599D',
+        secondary_background: '#EBEFF9',
         black: '#333333',
         accent: '#F7F7F7',
         gray: '#DFDFE1',
@@ -20,6 +21,7 @@ export default {
       dark: {
         primary: '#4DB7A1',
         secondary: '#44599D',
+        secondary_background: '#EBEFF9',
         black: '#333333',
         accent: '#F7F7F7',
         gray: '#DFDFE1',
