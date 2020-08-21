@@ -3,7 +3,9 @@
     <v-card class="pa-10">
       <v-row no-gutters>
         <v-spacer></v-spacer>
-        <v-btn icon color="primary"><v-icon>mdi-close</v-icon></v-btn>
+        <v-btn icon color="primary" @click="dialog = !dialog">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-row>
 
       <Register />

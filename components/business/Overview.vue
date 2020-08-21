@@ -27,7 +27,7 @@
     <v-list-item class="px-0">
       <v-col cols="3" class="py-0">Specialties</v-col>
       <v-col cols="9">
-        <v-chip-group v-model="selection" column>
+        <v-chip-group column>
           <v-chip small>#DesignCommunity</v-chip>
           <v-chip small>#PHdevelopers</v-chip>
           <v-chip small>#Freelancers</v-chip>
