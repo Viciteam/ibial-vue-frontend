@@ -14,7 +14,7 @@
     <div class="mt-7">
       <v-btn
         rounded
-        class="text-capitalize text-decoration-none mb-3"
+        class="text-capitalize google--btn text-decoration-none mb-3"
         block
         large
         depressed
@@ -150,5 +150,9 @@ export default {
   width: 50px;
   z-index: 23;
   position: relative;
+}
+
+#app .google--btn.v-btn--outlined {
+  border: thin solid #dfdfe1;
 }
 </style>
