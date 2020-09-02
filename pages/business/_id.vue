@@ -4,7 +4,7 @@
     <Header @tabs="onCurrentTab" />
     <!-- feed -->
     <v-row>
-      <v-col cols="12" xs="12" sm="8" md="8">
+      <v-col cols="12" xs="12" sm="8" :md="currentTab == 3 ? '12' : '8'">
         <div v-if="currentTab === 0">
           <v-row :class="{ 'px-6': $vuetify.breakpoint.smAndUp }">
             <v-col cols="6">
@@ -42,8 +42,9 @@
         </div>
 
         <Overview v-if="currentTab === 1" />
+        <Store v-if="currentTab === 3" />
       </v-col>
-      <v-col cols="12" xs="12" sm="4" md="4">
+      <v-col v-if="currentTab !== 3" cols="12" xs="12" sm="4" md="4">
         <Featured class="mt-3" />
         <Connections class="mt-3" />
       </v-col>
@@ -52,13 +53,14 @@
 </template>
 
 <script>
-import { Header, Overview } from '~/components/business'
+import { Header, Overview, Store } from '~/components/business'
 import { Feed, Featured, Connections } from '~/components/community/widgets'
 
 export default {
   components: {
     Header,
     Overview,
+    Store,
     Feed,
     Featured,
     Connections
