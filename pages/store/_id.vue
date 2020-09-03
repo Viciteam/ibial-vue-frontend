@@ -53,7 +53,8 @@
               <v-chip
                 v-for="item in chips"
                 :key="item"
-                class="blue--text"
+                color="secondary_background"
+                class="secondary--text"
                 small
                 >{{ item }}</v-chip
               >
