@@ -51,6 +51,34 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/login',
+            method: 'post',
+            propertyName: 'success.token'
+          },
+          user: {
+            url: '/getUser',
+            method: 'post',
+            propertyName: 'success'
+          },
+          logout: {
+            url: 'auth/logout',
+            method: 'post',
+            propertyName: false
+          }
+        }
+      }
+    },
+    redirect: {
+      login: '/'
+    }
+  },
+
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
@@ -65,6 +93,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/auth',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv'
   ],
@@ -85,7 +114,8 @@ export default {
       common: {
         Accept: 'application/json, text/plain, */*'
       }
-    }
+    },
+    baseURL: 'https://accounts.ibial.com/api/v1'
   },
   /*
    ** vuetify module configuration

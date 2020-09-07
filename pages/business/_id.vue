@@ -57,6 +57,7 @@ import { Header, Overview, Store } from '~/components/business'
 import { Feed, Featured, Connections } from '~/components/community/widgets'
 
 export default {
+  middleware: 'auth',
   components: {
     Header,
     Overview,

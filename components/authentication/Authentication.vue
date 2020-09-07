@@ -7,8 +7,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-row>
-
-      <Register />
+      <Register @cancelRegister="close" />
     </v-card>
   </v-dialog>
 </template>
@@ -28,7 +27,7 @@ export default {
       /**
        * all the datas here
        */
-      dialog: true
+      dialog: !this.$auth.loggedIn
     }
   },
   computed: {
@@ -50,6 +49,9 @@ export default {
     /**
      * all the methods here
      */
+    close(value) {
+      this.dialog = value
+    }
   }
 }
 </script>

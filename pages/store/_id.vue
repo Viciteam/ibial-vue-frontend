@@ -74,6 +74,7 @@
 import { ToggleViews } from '~/components/marketplace'
 
 export default {
+  middleware: 'auth',
   components: {
     ToggleViews
   },

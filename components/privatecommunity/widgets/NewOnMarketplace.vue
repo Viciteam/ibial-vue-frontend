@@ -18,7 +18,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col class="pa-0">
+      <v-col class="pa-0 text-center">
         <span class="mt-2 caption font-weight-medium medium_gray--text">
           #NetworkSystems
         </span>

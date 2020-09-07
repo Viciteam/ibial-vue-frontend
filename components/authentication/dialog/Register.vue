@@ -6,7 +6,13 @@
 
     <div class="text-center">
       Already have an account?
-      <a href="#" class="primary--text font-weight-medium text-decoration-none"
+      <a
+        href="#"
+        class="primary--text font-weight-medium text-decoration-none"
+        @click="
+          login = true
+          $emit('cancelRegister', false)
+        "
         >Sign in</a
       >
     </div>
@@ -60,53 +66,106 @@
     <div class="or__divider--container">
       <div class="text-center mx-auto white or__divider--line">OR</div>
     </div>
-
-    <v-text-field color="primary" placeholder="Email"></v-text-field>
-    <v-text-field
-      color="primary"
-      placeholder="Password"
-      name="input-10-1"
-      :type="isHidePassword ? 'text' : 'password'"
-      :append-icon="isHidePassword ? 'mdi-eye' : 'mdi-eye-off'"
-      @click:append="isHidePassword = !isHidePassword"
-    ></v-text-field>
-    <v-text-field
-      color="primary"
-      placeholder="Confirm Password"
-      name="input-10-1"
-      :type="isHideConfirmPassword ? 'text' : 'password'"
-      :append-icon="isHideConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-      @click:append="isHideConfirmPassword = !isHideConfirmPassword"
-    ></v-text-field>
-
-    <div>
-      <v-checkbox label="I agree to the Terms and Conditions."></v-checkbox>
-    </div>
-
-    <div class="text-center mt-2">
-      <v-btn
-        :width="$vuetify.breakpoint.smAndUp ? '300' : ''"
-        :block="$vuetify.breakpoint.xsOnly"
-        class="text-capitalize font-weight-semibold"
+    <v-form ref="form" v-model="valid">
+      <v-text-field
+        v-model="name"
         color="primary"
-        rounded
-        x-large
-      >
-        Get Started
-      </v-btn>
-    </div>
+        placeholder="Name"
+        :rules="[required('name')]"
+      ></v-text-field>
+      <v-text-field
+        v-model="email"
+        color="primary"
+        placeholder="Email"
+        :rules="[required('email'), isValidEmail()]"
+      ></v-text-field>
+      <v-text-field
+        v-model="password"
+        color="primary"
+        placeholder="Password"
+        name="input-10-1"
+        :type="isHidePassword ? 'text' : 'password'"
+        :append-icon="isHidePassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[required('password'), minLength('password', 5)]"
+        @click:append="isHidePassword = !isHidePassword"
+      ></v-text-field>
+      <v-text-field
+        v-model="confirm_password"
+        color="primary"
+        placeholder="Confirm Password"
+        name="input-10-1"
+        :type="isHideConfirmPassword ? 'text' : 'password'"
+        :append-icon="isHideConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[
+          required('confirm password'),
+          password === confirm_password || 'Password must match'
+        ]"
+        @click:append="isHideConfirmPassword = !isHideConfirmPassword"
+      ></v-text-field>
+
+      <div>
+        <v-checkbox
+          v-model="terms"
+          :rules="[terms === true || 'You must agree to continue!']"
+          label="I agree to the Terms and Conditions."
+        ></v-checkbox>
+      </div>
+
+      <div class="text-center mt-2">
+        <v-btn
+          :width="$vuetify.breakpoint.smAndUp ? '300' : ''"
+          :block="$vuetify.breakpoint.xsOnly"
+          class="text-capitalize font-weight-semibold"
+          color="primary"
+          rounded
+          x-large
+          :disabled="!valid"
+          :loading="loading"
+          @click="register"
+        >
+          Get Started
+        </v-btn>
+      </div>
+    </v-form>
+    <v-dialog v-model="login" width="450">
+      <v-card class="pa-10">
+        <v-row no-gutters>
+          <v-spacer></v-spacer>
+          <v-btn icon color="primary" @click="login = !login">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-row>
+        <Login @showSignUp="signup" />
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import validations from '@/utils/validations'
+import { Login } from '@/components/authentication/dialog'
+import axios from 'axios'
+
 export default {
+  components: {
+    Login
+  },
   data() {
     return {
       /**
        * all the datas here
        */
       isHidePassword: false,
-      isHideConfirmPassword: false
+      isHideConfirmPassword: false,
+      ...validations,
+      valid: true,
+      name: '',
+      email: '',
+      password: '',
+      confirm_password: '',
+      terms: '',
+      login: false,
+      loading: false
     }
   },
   computed: {
@@ -128,6 +187,31 @@ export default {
     /**
      * all the methods here
      */
+    async register() {
+      let details = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        c_password: this.confirm_password
+      }
+      this.loading = true
+      try {
+        await axios.post('https://accounts.ibial.com/api/v1/register', details)
+
+        await this.$auth.loginWith('local', {
+          data: details
+        })
+        this.loading = false
+        this.$router.push('/community')
+      } catch (error) {
+        console.log(error)
+        this.loading = false
+      }
+    },
+    signup(value) {
+      this.login = false
+      this.$emit('cancelRegister', value)
+    }
   }
 }
 </script>
