@@ -62,6 +62,7 @@
       name="input-10-1"
       :type="isHidePassword ? 'text' : 'password'"
       :append-icon="isHidePassword ? 'mdi-eye' : 'mdi-eye-off'"
+      @keyup.enter="login"
       @click:append="isHidePassword = !isHidePassword"
     ></v-text-field>
     <div class="text-center mt-2">
@@ -135,9 +136,21 @@ export default {
         await this.$auth.loginWith('local', {
           data: details
         })
+        const notif = {
+          display: true,
+          type: 'success',
+          message: 'Thanks for signing in..'
+        }
+        this.$store.dispatch('addNotifications', notif)
         this.loading = false
         this.$router.push('/community')
       } catch (error) {
+        const notif = {
+          display: true,
+          type: 'error',
+          message: 'There was an issue signing in. Please try again.'
+        }
+        this.$store.dispatch('addNotifications', notif)
         console.log(error)
         this.loading = false
       }

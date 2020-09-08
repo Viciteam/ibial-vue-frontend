@@ -144,7 +144,7 @@
 <script>
 import validations from '@/utils/validations'
 import { Login } from '@/components/authentication/dialog'
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
   components: {
@@ -196,15 +196,26 @@ export default {
       }
       this.loading = true
       try {
-        await axios.post('https://accounts.ibial.com/api/v1/register', details)
-
+        this.$api.accounts.account.register(details)
         await this.$auth.loginWith('local', {
           data: details
         })
+        const notif = {
+          display: true,
+          type: 'success',
+          message: 'Thanks for signing up..'
+        }
+        this.$store.dispatch('addNotifications', notif)
         this.loading = false
         this.$router.push('/community')
       } catch (error) {
         console.log(error)
+        const notif = {
+          display: true,
+          type: 'error',
+          message: 'There was an issue signing up. Please try again.'
+        }
+        this.$store.dispatch('addNotifications', notif)
         this.loading = false
       }
     },
