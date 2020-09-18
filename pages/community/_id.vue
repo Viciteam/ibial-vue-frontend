@@ -24,7 +24,6 @@ import {
 
 export default {
   middleware: 'auth',
-  //auth: 'guest',
   components: {
     ProfileWidget,
     PostsFeed,

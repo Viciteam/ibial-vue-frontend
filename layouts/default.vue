@@ -12,7 +12,7 @@
       <template v-slot:action="{ attrs }">
         <v-btn color="white" v-bind="attrs" icon @click="notification = false">
           <v-icon>{{
-            mscolor == 'success' ? 'mdi-check' : 'mdi-close'
+            mscolor == 'primary' ? 'mdi-check' : 'mdi-close'
           }}</v-icon>
         </v-btn>
       </template>

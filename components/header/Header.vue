@@ -1,6 +1,8 @@
 <template>
   <v-app-bar app flat color="white">
     <v-toolbar-title>iBial</v-toolbar-title>
+    <!--<v-spacer></v-spacer>
+    <span v-if="this.$auth.loggedIn" @click="logout">logout</span>-->
   </v-app-bar>
 </template>
 
@@ -32,6 +34,9 @@ export default {
     /**
      * all the methods here
      */
+    /*logout() {
+      this.$auth.logout()
+    }*/
   },
   head: {
     /**

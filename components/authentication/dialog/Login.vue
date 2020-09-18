@@ -138,7 +138,7 @@ export default {
         })
         const notif = {
           display: true,
-          type: 'success',
+          type: 'primary',
           message: 'Thanks for signing in..'
         }
         this.$store.dispatch('addNotifications', notif)
