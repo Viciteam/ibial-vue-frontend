@@ -57,7 +57,7 @@ import { Header, Overview, Store } from '~/components/business'
 import { Feed, Featured, Connections } from '~/components/community/widgets'
 
 export default {
-  middleware: 'auth',
+  //middleware: 'auth',
   components: {
     Header,
     Overview,
@@ -71,7 +71,8 @@ export default {
       /**
        * all the datas here
        */
-      currentTab: 0
+      currentTab: 0,
+      business: {}
     }
   },
   computed: {
