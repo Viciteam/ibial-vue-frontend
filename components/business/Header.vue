@@ -13,35 +13,34 @@
 
       <v-col cols="10" class="mb-10">
         <div>
-          <v-list-item-title class="headline mb-4"
-            >Business Name #1</v-list-item-title
-          >
+          <v-list-item-title class="headline mb-4">
+            <span v-if="profile">{{ profile.name }}</span>
+          </v-list-item-title>
           <v-list-item-subtitle class="mb-10">
-            I design things sed soluta mollis eleifend eu I design things sed
-            soluta mollis eleifend eu
+            <span v-if="profile">{{ profile.tag_line }}</span>
           </v-list-item-subtitle>
 
           <v-list-item class="px-0">
             <v-icon class="mr-4">mdi-map-marker</v-icon>
-            <span>Hanoi, Vietnam</span>
+            <span v-if="profile">
+              {{ profile.city }}, {{ profile.country }}</span
+            >
           </v-list-item>
 
           <v-list-item class="px-0">
             <v-icon class="mr-4">mdi-flag-outline</v-icon>
-            <span>English, Vietnamese, Mandarin</span>
+            <span v-if="profile">{{ profile.languages }}</span>
           </v-list-item>
 
           <v-list-item class="px-0">
             <v-icon class="mr-4">mdi-web</v-icon>
-            <span>Visit website</span>
+            <span v-if="profile">{{ profile.business_email }}</span>
           </v-list-item>
 
           <v-list-item class="px-0">
             <v-icon class="mr-4">mdi-tag-outline</v-icon>
-            <v-chip-group column>
-              <v-chip small>#DesignCommunity</v-chip>
-              <v-chip small>#PHdevelopers</v-chip>
-              <v-chip small>#Freelancers</v-chip>
+            <v-chip-group v-for="value in tags" :key="value">
+              <v-chip small>{{ value.tag }}</v-chip>
             </v-chip-group>
           </v-list-item>
         </div>
@@ -76,12 +75,31 @@ export default {
   },
   data() {
     return {
-      tabsModel: 0
+      tabsModel: 0,
+      business: null,
+      tags: null,
+      profile: null
     }
   },
   watch: {
     tabsModel(val) {
       this.$emit('tabs', val)
+    }
+  },
+  mounted() {
+    this.getBusinessProfileDetails()
+  },
+  methods: {
+    async getBusinessProfileDetails() {
+      try {
+        this.business = await this.$businessRepository.GetBusinessProfileDetails(
+          this.$route.params.id
+        )
+        this.profile = this.business.data
+        this.tags = this.business.data.tags
+        console.log(this.tags)
+        // eslint-disable-next-line no-empty
+      } catch (error) {}
     }
   }
 }

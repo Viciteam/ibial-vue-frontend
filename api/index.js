@@ -1,4 +1,4 @@
 import Repository from './repository'
 import SocialRepository from './social.repository'
-
-export { Repository, SocialRepository }
+import BusinessRepository from './business/business.repository'
+export { Repository, SocialRepository, BusinessRepository}
