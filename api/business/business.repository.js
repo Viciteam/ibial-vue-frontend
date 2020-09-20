@@ -4,7 +4,7 @@ export default ($axios) => ({
    * discription here
    *
    * @param   {number}  id
-   *
+   *git
    * @return  {Promise}
    */
   GetBusinessProfileDetails(id) {

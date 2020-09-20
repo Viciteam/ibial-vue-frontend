@@ -39,8 +39,8 @@
 
           <v-list-item class="px-0">
             <v-icon class="mr-4">mdi-tag-outline</v-icon>
-            <v-chip-group v-for="value in tags" :key="value">
-              <v-chip small>{{ value.tag }}</v-chip>
+            <v-chip-group v-for="item in tagsBusiness" :key="item.tag">
+              <v-chip small>{{ item.tag }}</v-chip>
             </v-chip-group>
           </v-list-item>
         </div>
@@ -77,7 +77,7 @@ export default {
     return {
       tabsModel: 0,
       business: null,
-      tags: null,
+      tagsBusiness: null,
       profile: null
     }
   },
@@ -96,8 +96,8 @@ export default {
           this.$route.params.id
         )
         this.profile = this.business.data
-        this.tags = this.business.data.tags
-        console.log(this.tags)
+        this.tagsBusiness = this.business.data.tags
+        //console.log(this.tagsBusiness)
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }

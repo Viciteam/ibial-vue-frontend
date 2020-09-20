@@ -15,7 +15,7 @@
     <v-row>
       <v-col cols="12" sm="4" class="text-center">
         <div
-          class="ma-3 px-12 title font-weight-bold dark_gray--text new__offering--btn"
+          class="ma-3 px-12 title font-weight-bold dark_gray--text new__offering--btn create-offering"
           @click="newOffering"
         >
           + Create A New Offering
@@ -66,7 +66,9 @@ export default {
           likes: '',
           price: '$60'
         }
-      ]
+      ],
+      response: null,
+      products: null
     }
   },
   computed: {
@@ -83,6 +85,7 @@ export default {
     /**
      * all the mounted here
      */
+    this.getProducts()
   },
   methods: {
     /**
@@ -90,6 +93,16 @@ export default {
      */
     newOffering() {
       console.log('new offer..')
+    },
+    async getProducts() {
+      console.log('TEST')
+      try {
+        this.response = await this.$productRepository.GetProducts()
+        this.products = this.response.data
+        // eslint-disable-next-line no-empty
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
@@ -104,5 +117,8 @@ export default {
 }
 .new__offering--btn:hover {
   cursor: pointer;
+}
+.create-offering {
+  min-height: 342px;
 }
 </style>
