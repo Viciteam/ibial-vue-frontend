@@ -1,4 +1,4 @@
-/*const API_URL = 'https://businesses.ibial.com/api'*/
+const API_URL = 'https://businesses.ibial.com/api'
 export default ($axios) => ({
   /**
    * discription here
@@ -8,7 +8,7 @@ export default ($axios) => ({
    * @return  {Promise}
    */
   GetBusinessProfileDetails(id) {
-    /*return $axios.$get(`${API_URL}/business/${id}`)*/
-    return $axios.$get(`http://127.0.0.1:8000/api/business/${id}`)
+    return $axios.$get(`${API_URL}/business/${id}`)
+    /*return $axios.$get(`http://127.0.0.1:8000/api/business/${id}`)*/
   }
 })
