@@ -19,7 +19,8 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@simmo/task": "0.0.1",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "moment": "2.23.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
