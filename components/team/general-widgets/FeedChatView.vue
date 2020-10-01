@@ -121,6 +121,7 @@ export default {
 }
 .middleContainer__width--max {
   max-width: 54%;
+  min-width: 54%;
 }
 .rounded-cards {
   border-radius: 100px !important;
