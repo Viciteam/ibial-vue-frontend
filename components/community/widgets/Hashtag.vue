@@ -2,13 +2,13 @@
   <div>
     <div v-if="template === 'chips'">
       <v-chip
-        v-for="n in 3"
-        :key="n"
+        v-for="titems in tags"
+        :key="titems"
         class="mr-2 mt-2"
         color="secondary_background"
         text-color="secondary"
       >
-        #Hashtag {{ n }}
+        #{{ titems }}
       </v-chip>
     </div>
 
@@ -29,6 +29,10 @@ export default {
   props: {
     template: {
       type: String,
+      default: null
+    },
+    tags: {
+      type: Object,
       default: null
     }
   },

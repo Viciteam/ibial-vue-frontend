@@ -7,7 +7,9 @@
         ></v-img>
       </v-avatar>
     </v-btn>
-    <span class="medium_gray--text body-2 ml-n1 mr-1">0</span>
+    <span class="medium_gray--text body-2 ml-n1 mr-1">
+      {{ reactions.like }}
+    </span>
 
     <v-btn icon color="secondary" @click="onClickLikeDislike('dislike')">
       <v-avatar tile :size="imported === 'comment' ? '18' : '19'" class="mb-n1">
@@ -20,9 +22,16 @@
         ></v-img>
       </v-avatar>
     </v-btn>
-    <span class="medium_gray--text body-2 ml-n1 mr-1">0</span>
+    <span class="medium_gray--text body-2 ml-n1 mr-1">
+      {{ reactions.dislike }}
+    </span>
 
-    <v-btn icon color="secondary" @click="isCommented = !isCommented">
+    <v-btn
+      v-if="showcomment"
+      icon
+      color="secondary"
+      @click="isCommented = !isCommented"
+    >
       <v-avatar tile :size="imported === 'comment' ? '18' : '19'">
         <v-img
           :src="
@@ -33,7 +42,9 @@
         ></v-img>
       </v-avatar>
     </v-btn>
-    <span class="medium_gray--text body-2 ml-n1 mr-1">0</span>
+    <span v-if="showcomment" class="medium_gray--text body-2 ml-n1 mr-1">
+      {{ comments }}
+    </span>
   </div>
 </template>
 
@@ -43,6 +54,18 @@ export default {
     imported: {
       type: String,
       default: null
+    },
+    comments: {
+      type: String,
+      default: '0'
+    },
+    reactions: {
+      type: Object,
+      default: null
+    },
+    showcomment: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

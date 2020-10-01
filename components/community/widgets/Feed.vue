@@ -1,16 +1,20 @@
 <template>
   <div>
-    <v-card v-for="n in 2" :key="n" class="box_shadow--default mb-3">
-      <v-list>
+    <v-card
+      v-for="(item, n) in feedData"
+      :key="n"
+      class="box_shadow--default my-3"
+    >
+      <v-list pa>
         <v-list-item>
           <v-list-item-avatar size="60" color="gray"> </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title class="black--text body-1 font-weight-bold">
-              My Business Name
+              User ID : {{ item.user }}
             </v-list-item-title>
             <v-list-item-subtitle class="medium_gray--text mt-1">
-              8 min ago
+              {{ item.posted_on }}
             </v-list-item-subtitle>
           </v-list-item-content>
 
@@ -23,9 +27,9 @@
       </v-list>
 
       <div class="px-4 pt-2 pb-4">
-        <FeedContent />
+        <FeedContent :feed-content="item.content" />
 
-        <Hashtag :template="'chips'" />
+        <Hashtag :tags="item.tag" :template="'chips'" />
       </div>
 
       <div class="px-4 py-2">
@@ -33,7 +37,12 @@
       </div>
 
       <v-row no-gutters class="px-4 pt-2 pb-4" align="center">
-        <PostReactions :imported="'feed'" />
+        <PostReactions
+          :reactions="item.reaction"
+          :comments="item.comments.length"
+          :imported="'feed'"
+          class="py-3"
+        />
 
         <v-spacer></v-spacer>
 
@@ -49,7 +58,7 @@
 
       <div class="px-4">
         <CommentField />
-        <CommentSection />
+        <CommentSection :feed-comments="item.comments" />
       </div>
     </v-card>
   </div>
@@ -74,12 +83,14 @@ export default {
     PostReactions,
     CommentField,
     CommentSection
+    // UserFullName
   },
   data() {
     return {
-      /**
-       * all the datas here
-       */
+      feedCount: 0,
+      feedData: null,
+      feedContent: null
+      // UserFullName: null
     }
   },
   computed: {
@@ -93,14 +104,29 @@ export default {
      */
   },
   mounted() {
-    /**
-     * all the mounted here
-     */
+    this.getBusinessFeed()
   },
   methods: {
-    /**
-     * all the methods here
-     */
+    async getBusinessFeed() {
+      try {
+        this.feed = await this.$feedRepository.getFeedByBusiness(1)
+        this.feedData = this.feed.data
+        console.log(this.feedData)
+
+        this.feedCount = this.feed.data.length
+        console.log(this.feedCount)
+        // this.business = await this.$businessRepository.GetBusinessProfileDetails(
+        //   this.$route.params.id
+        // )
+        // this.profile = this.business.data
+        // this.tagsBusiness = this.business.data.tags
+        //console.log(this.tagsBusiness)
+        // eslint-disable-next-line no-empty
+      } catch (error) {}
+    }
+    // async getUserName(id) {
+    //   // this.UserFullName = "my Name"
+    // }
   }
 }
 </script>
