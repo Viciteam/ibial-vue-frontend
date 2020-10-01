@@ -26,7 +26,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #fff;
+  background: #ffffff;
 }
 
 /* Handle */
@@ -38,4 +38,45 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #888;
+}
+
+#app .white--transparent {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#app .primary--transparent {
+  background: rgba(85, 201, 173, 0.3);
+}
+
+#app .p-absolute {
+  position: absolute;
+}
+
+/* Default Shadow */
+#app .box-shadow--default {
+  box-shadow: 0px 4px 10px rgba(189, 189, 189, 0.25);
+}
+/* Primary Button Shadow */
+#app .btn-shadow--default {
+  box-shadow: 0px 5px 20px rgba(77, 183, 161, 0.25);
+}
+/* Chat Message Shadow */
+#app .chat-shadow--default {
+  box-shadow: 1px 2px 3px rgba(240, 243, 244, 0.5);
+}
+/* Dropdown Menu Shadow */
+#app .dropdown-shadow--default {
+  box-shadow: 0px 4px 20px rgba(189, 189, 189, 0.5);
+}
+/* Sidebar Light Shadow */
+#app .sidebar-shadow--default {
+  box-shadow: 2px 2px 20px rgba(238, 240, 244, 0.5);
+}
+/* auto scroll */
+#app .overflow-scroll--auto {
+  overflow: auto;
+}
+/* disable pointer events */
+.disable-events {
+  pointer-events: none;
 }

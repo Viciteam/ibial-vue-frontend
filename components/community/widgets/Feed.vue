@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-card v-for="n in 2" :key="n" class="box_shadow--default my-3">
-      <v-list pa>
+    <v-card v-for="n in 2" :key="n" class="box_shadow--default mb-3">
+      <v-list>
         <v-list-item>
           <v-list-item-avatar size="60" color="gray"> </v-list-item-avatar>
 
