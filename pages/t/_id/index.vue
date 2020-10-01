@@ -24,6 +24,7 @@ export default {
 <style scoped>
 .middleContainer__width--max {
   max-width: 54%;
+  min-width: 54%;
 }
 /* width */
 .flexContainer__width--max::-webkit-scrollbar {
