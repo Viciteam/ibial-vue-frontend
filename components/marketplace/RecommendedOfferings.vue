@@ -112,35 +112,7 @@ export default {
   },
   data() {
     return {
-      offerings: [
-        {
-          id: 1,
-          title: 'Lorem Ipsum',
-          subtitle:
-            'Instantly turn your WordPress articles into podcasts with no mics or studios...',
-          seller: 'Company C',
-          likes: '16',
-          price: 'from $100'
-        },
-        {
-          id: 2,
-          title: 'Lorem Ipsum',
-          subtitle:
-            'Instantly turn your WordPress articles into podcasts with no mics or studios...',
-          seller: 'Company C',
-          likes: '16',
-          price: 'from $100'
-        },
-        {
-          id: 3,
-          title: 'Lorem Ipsum',
-          subtitle:
-            'Instantly turn your WordPress articles into podcasts with no mics or studios...',
-          seller: 'Company C',
-          likes: '16',
-          price: 'from $100'
-        }
-      ]
+      offerings: null
     }
   },
   computed: {
@@ -148,6 +120,23 @@ export default {
       return this.views
     }
   },
-  methods: {}
+  mounted() {
+    /**
+     * all the mounted here
+     */
+    this.getProducts()
+  },
+  methods: {
+    async getProducts() {
+      try {
+        this.response = await this.$productRepository.GetProducts()
+        this.offerings = this.response.data
+        console.log(`RECOMMENDED OFFERING`)
+        // eslint-disable-next-line no-empty
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 }
 </script>
