@@ -95,10 +95,12 @@ export default {
       console.log('new offer..')
     },
     async getProducts() {
-      console.log('TEST')
       try {
         this.response = await this.$productRepository.GetProducts()
         this.products = this.response.data
+        console.log(`TEST`)
+        console.log(this.products)
+        console.log(`TEST`)
         // eslint-disable-next-line no-empty
       } catch (error) {
         console.log(error)
