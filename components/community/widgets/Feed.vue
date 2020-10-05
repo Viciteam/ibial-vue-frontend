@@ -83,14 +83,12 @@ export default {
     PostReactions,
     CommentField,
     CommentSection
-    // UserFullName
   },
   data() {
     return {
       feedCount: 0,
       feedData: null,
       feedContent: null
-      // UserFullName: null
     }
   },
   computed: {
@@ -124,9 +122,6 @@ export default {
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }
-    // async getUserName(id) {
-    //   // this.UserFullName = "my Name"
-    // }
   }
 }
 </script>
