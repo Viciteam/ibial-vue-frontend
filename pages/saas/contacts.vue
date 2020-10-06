@@ -72,11 +72,15 @@ export default {
   methods: {
     async getContacts() {
       try {
-        await this.$saasRepository.Contacts(1234).then((response) => {
-          console.log(response)
-          this.loading = false
-          this.contacts = response
-        })
+        await this.$saasRepository
+          .Contacts(this.$auth.user.id)
+          //.AllContacts()
+          .then((response) => {
+            //console.log(response.contacts)
+            this.loading = false
+            this.contacts = response.contacts
+            //this.contacts = response
+          })
         // eslint-disable-next-line no-empty
       } catch (error) {
         this.loading = false
