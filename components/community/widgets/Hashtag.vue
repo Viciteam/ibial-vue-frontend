@@ -32,7 +32,7 @@ export default {
       default: null
     },
     tags: {
-      type: Object,
+      type: Array,
       default: null
     }
   },
