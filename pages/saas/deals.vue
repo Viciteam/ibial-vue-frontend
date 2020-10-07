@@ -45,7 +45,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <Deals />
+            <Deals :deals="deals" />
           </v-col>
         </v-row>
       </v-col>
@@ -61,7 +61,27 @@ export default {
     Deals
   },
   data() {
-    return {}
+    return {
+      deals: []
+    }
+  },
+  mounted() {
+    this.getDeals()
+  },
+  methods: {
+    async getDeals() {
+      try {
+        await this.$saasRepository
+          .getDeals(this.$auth.user.id)
+          .then((response) => {
+            console.log(response.data)
+            this.deals = response.data
+          })
+        // eslint-disable-next-line no-empty
+      } catch (error) {
+        //this.loading = false
+      }
+    }
   }
 }
 </script>

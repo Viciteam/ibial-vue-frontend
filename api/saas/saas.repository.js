@@ -14,5 +14,13 @@ export default ($axios) => ({
 
   Contacts(id) {
     return $axios.$get(`${API_URL}/contacts/${id}`)
+  },
+
+  AddStage(data) {
+    return $axios.$post(`${API_URL}/dealstages`, data)
+  },
+
+  getDeals(id) {
+    return $axios.$get(`${API_URL}/deals/${id}`)
   }
 })
