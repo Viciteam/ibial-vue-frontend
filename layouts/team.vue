@@ -1,5 +1,6 @@
 <template>
   <v-app id="app" class="accent">
+    <Authentication />
     <Header />
     <TeamSpaceHeader />
 
@@ -21,6 +22,7 @@ import { Header } from '~/components/header'
 import { TeamSpaceHeader } from '~/components/team'
 import { mapGetters } from 'vuex'
 import { Room, Chats, FeedChatSidebar } from '~/components/team/general-widgets'
+import { Authentication } from '~/components/authentication'
 
 export default {
   components: {
@@ -31,7 +33,8 @@ export default {
     TeamSpaceHeader,
     Room,
     Chats,
-    FeedChatSidebar
+    FeedChatSidebar,
+    Authentication
   },
   data() {
     return {
