@@ -1,5 +1,5 @@
-// const SOCIAL_URL = 'https://social.ibial.com/api'
-const SOCIAL_URL = 'https://socialv2.app/api'
+const SOCIAL_URL = 'https://social.ibial.com/api'
+//const SOCIAL_URL = 'https://socialv2.app/api'
 export default ($axios) => ({
   /**
    * discription here
