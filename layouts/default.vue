@@ -6,7 +6,7 @@
       <nuxt />
     </v-main>
 
-    <Authentication v-if="$route.name === 'index'" />
+    <Authentication />
     <v-snackbar v-model="notification" :color="mscolor">
       {{ message }}
       <template v-slot:action="{ attrs }">
