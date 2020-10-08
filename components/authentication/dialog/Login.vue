@@ -144,6 +144,7 @@ export default {
         this.$store.dispatch('addNotifications', notif)
         this.loading = false
         //$router.go({path:this.$route.path, force: true})
+        this.$emit('showSignUp', false)
       } catch (error) {
         const notif = {
           display: true,
