@@ -207,7 +207,7 @@ export default {
         }
         this.$store.dispatch('addNotifications', notif)
         this.loading = false
-        this.$router.push('/')
+        this.$emit('cancelRegister', false)
       } catch (error) {
         console.log(error)
         const notif = {
