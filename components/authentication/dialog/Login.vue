@@ -143,7 +143,7 @@ export default {
         }
         this.$store.dispatch('addNotifications', notif)
         this.loading = false
-        this.$router.push(this.$route.path)
+        //$router.go({path:this.$route.path, force: true})
       } catch (error) {
         const notif = {
           display: true,

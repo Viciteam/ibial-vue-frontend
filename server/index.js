@@ -21,7 +21,7 @@ async function start() {
   
     server.listen(port, () => {
       consola.ready({
-        message: `Server listening on http://${host}:${port}`,
+        message: 'Server listening on http://${host}:${port}',
         badge: true,
       });
     });
