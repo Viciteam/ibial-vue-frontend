@@ -143,7 +143,8 @@ export default {
         }
         this.$store.dispatch('addNotifications', notif)
         this.loading = false
-        this.$router.push('/community')
+        this.$router.push('/')
+        this.$emit('showSignUp', false)
       } catch (error) {
         const notif = {
           display: true,
@@ -151,7 +152,7 @@ export default {
           message: 'There was an issue signing in. Please try again.'
         }
         this.$store.dispatch('addNotifications', notif)
-        console.log(error)
+        //console.log(error)
         this.loading = false
       }
     }

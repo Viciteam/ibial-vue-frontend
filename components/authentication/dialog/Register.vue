@@ -207,7 +207,7 @@ export default {
         }
         this.$store.dispatch('addNotifications', notif)
         this.loading = false
-        this.$router.push('/community')
+        this.$router.push('/')
       } catch (error) {
         console.log(error)
         const notif = {

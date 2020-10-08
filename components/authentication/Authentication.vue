@@ -22,12 +22,18 @@ export default {
      */
     Register
   },
+  props: {
+    signup: {
+      type: Boolean
+      //required: true
+    }
+  },
   data() {
     return {
       /**
        * all the datas here
        */
-      dialog: !this.$auth.loggedIn
+      dialog: false
     }
   },
   computed: {
@@ -39,6 +45,13 @@ export default {
     /**
      * all the watchers here
      */
+    signup() {
+      console.log(this.signup)
+      this.dialog = this.signup
+    },
+    dialog() {
+      return !this.dialog ? this.$emit('cancelSignup', false) : ''
+    }
   },
   mounted() {
     /**

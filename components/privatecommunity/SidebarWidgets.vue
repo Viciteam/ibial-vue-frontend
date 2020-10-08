@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RecentOfferings />
+    <RecentOfferings v-if="this.$auth.loggedIn" />
     <PopularTags />
-    <SuggestedConnections />
+    <SuggestedConnections v-if="this.$auth.loggedIn" />
     <NewOnMarketplace />
   </div>
 </template>
