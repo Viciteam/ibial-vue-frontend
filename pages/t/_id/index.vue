@@ -11,7 +11,6 @@
 
 <script>
 import { Feed, PostField } from '~/components/community/widgets'
-
 export default {
   layout: 'team',
   components: {

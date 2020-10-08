@@ -47,7 +47,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/repository', mode: 'client' }],
+  plugins: [
+    { src: '~/plugins/repository', mode: 'client' },
+    { src: '~/plugins/socket.client.js' },
+  ],
   /*
    ** Nuxt.js dev-modules
    */

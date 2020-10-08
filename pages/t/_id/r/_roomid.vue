@@ -9,6 +9,9 @@ export default {
   layout: 'team',
   components: {
     FeedChatView
+  },
+  mounted() {
+    console.log('User is logged in: ', this.$auth.loggedIn)
   }
 }
 </script>

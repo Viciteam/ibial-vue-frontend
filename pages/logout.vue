@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height />
+  <v-container fill-height>Logout here</v-container>
 </template>
 
 <script>
@@ -25,17 +25,22 @@ export default {
     /**
      * all the mounted here
      */
+    this.logout()
   },
   methods: {
     /**
      * all the methods here
      */
+    async logout() {
+      //put logic to also logout of the microservice
+      await this.$auth.logout()
+    }
   },
   head: {
     /**
      * all the header here
      */
-    title: 'Home'
+    title: 'Logout'
   }
 }
 </script>

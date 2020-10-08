@@ -56,11 +56,11 @@ export default {
       default: null
     },
     comments: {
-      type: String,
-      default: '0'
+      type: Number,
+      default: 0
     },
     reactions: {
-      type: Object,
+      type: Array,
       default: null
     },
     showcomment: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-for="feed in feedComments" :key="feed" flat class="py-2">
+    <v-card v-for="(feed, fin) in feedComments" :key="fin" flat class="py-2">
       <v-list-item class="pa-0">
         <v-list-item-avatar
           class="align-self-start mt-n1"
@@ -29,7 +29,12 @@
           class="py-3"
         />
         <div class="sub-feeds">
-          <v-card v-for="reply in feed.replies" :key="reply" flat class="py-2">
+          <v-card
+            v-for="(reply, rin) in feed.replies"
+            :key="rin"
+            flat
+            class="py-2"
+          >
             <v-list-item class="pa-0">
               <v-list-item-avatar
                 class="align-self-start mt-n1"
@@ -77,7 +82,12 @@ export default {
     CommentField,
     PostReactions
   },
-  props: ['feedComments'],
+  props: {
+    feedComments: {
+      type: Array,
+      default: null
+    }
+  },
   data() {
     return {
       /**
