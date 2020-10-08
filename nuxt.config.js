@@ -70,7 +70,7 @@ export default {
             propertyName: 'success'
           },
           logout: {
-            url: 'auth/logout',
+            url: '/logout',
             method: 'post',
             propertyName: false
           }

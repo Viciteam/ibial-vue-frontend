@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row>
+    <v-row v-if="this.$auth.loggedIn">
       <v-col class="py-0">
         <v-btn
           class="text-capitalize font-weight-semi-bold white--text py-7 box_shadow--default"
@@ -33,7 +33,7 @@
       </v-col>
     </v-row>
     <v-divider class="mt-6"></v-divider>
-    <v-row>
+    <v-row v-if="this.$auth.loggedIn">
       <v-col class="caption">
         Personalize your feed:
         <v-btn text class="caption text-capitalize" small>
