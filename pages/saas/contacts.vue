@@ -55,6 +55,7 @@
 import { Contacts, Segments, Archived } from '~/components/saas/contacts'
 
 export default {
+  middleware: 'auth',
   components: {
     Contacts,
     Segments,

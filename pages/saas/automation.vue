@@ -79,6 +79,7 @@
 import { Workflow } from '~/components/saas/automation'
 
 export default {
+  middleware: 'auth',
   components: {
     Workflow
   },

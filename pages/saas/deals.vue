@@ -57,6 +57,7 @@
 import { Deals } from '~/components/saas/deals'
 
 export default {
+  middleware: 'auth',
   components: {
     Deals
   },
