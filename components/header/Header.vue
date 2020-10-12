@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app flat color="white">
+  <v-app-bar app flat clipped-left color="white">
     <v-toolbar-title>iBial</v-toolbar-title>
     <v-spacer></v-spacer>
     <span v-if="this.$auth.loggedIn" @click="logout">logout</span>
