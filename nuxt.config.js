@@ -12,6 +12,9 @@ export default {
     port: process.env.APP_PORT,
     host: process.env.APP_HOST
   },
+  generate: {
+    dir: 'public'
+  },
   /*
    ** Headers of the page
    */
@@ -49,7 +52,7 @@ export default {
    */
   plugins: [
     { src: '~/plugins/repository', mode: 'client' },
-    { src: '~/plugins/socket.client.js' },
+    { src: '~/plugins/socket.client.js' }
   ],
   /*
    ** Nuxt.js dev-modules
