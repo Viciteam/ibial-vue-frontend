@@ -40,12 +40,17 @@
   background: #888;
 }
 
+/* Theme with transparent color */
 #app .white--transparent {
   background: rgba(255, 255, 255, 0.2);
 }
 
 #app .primary--transparent {
   background: rgba(85, 201, 173, 0.3);
+}
+
+#app .secondary--fade {
+  background-color: #ebeff9;
 }
 
 #app .p-absolute {
@@ -79,4 +84,14 @@
 /* disable pointer events */
 .disable-events {
   pointer-events: none;
+}
+
+/* custom font sizes */
+#app .text-h4-v2 {
+  font-size: 32px;
+  line-height: 150%;
+}
+#app .text-h4-v3 {
+  font-size: 30px;
+  line-height: 150%;
 }
