@@ -12,9 +12,6 @@ export default {
     port: process.env.APP_PORT,
     host: process.env.APP_HOST
   },
-  generate: {
-    dir: 'public'
-  },
   /*
    ** Headers of the page
    */
