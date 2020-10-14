@@ -8,6 +8,7 @@ const APP_DESCRIPTION = 'Sed ut perspiciatis unde omnis iste natus voluptatem.'
 export default {
   target: 'static',
   mode: 'spa',
+  ssr: false,
   server: {
     port: process.env.APP_PORT,
     host: process.env.APP_HOST
