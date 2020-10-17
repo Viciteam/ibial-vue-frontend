@@ -20,7 +20,11 @@
             <v-card class="box_shadow--default">
               <v-list flat>
                 <v-list-item-group v-model="sidebarMenu" color="primary">
-                  <v-list-item v-for="(item, i) in items" :key="i">
+                  <v-list-item
+                    v-for="(item, i) in items"
+                    :key="i"
+                    @click="navigate(item.text)"
+                  >
                     <v-list-item-icon class="pl-3">
                       <v-icon v-text="item.icon"></v-icon>
                     </v-list-item-icon>
@@ -32,7 +36,7 @@
                     </v-list-item-action>
                   </v-list-item>
                   <v-divider></v-divider>
-                  <v-list-item>
+                  <v-list-item @click="navigate('Saved Offerings')">
                     <v-list-item-icon class="pl-3">
                       <v-icon>mdi-bookmark-outline</v-icon>
                     </v-list-item-icon>
@@ -63,7 +67,12 @@
         </v-row>
         <v-row>
           <v-col>
-            <ToggleViews />
+            <MyStore v-if="nav === 'My Store'" />
+            <Sales v-else-if="nav === 'Sales'" />
+            <Purchases v-else-if="nav === 'Purchases'" />
+            <Wallet v-else-if="nav === 'Wallet'" />
+            <Referrals v-else-if="nav === 'Referrals'" />
+            <SavedOfferings v-else-if="nav === 'Saved Offerings'" />
           </v-col>
         </v-row>
       </v-col>
@@ -71,16 +80,22 @@
   </v-container>
 </template>
 <script>
-import { ToggleViews } from '~/components/marketplace'
+import { MyStore } from '~/components/marketplace'
 
 export default {
   /*middleware: 'auth',*/
   components: {
-    ToggleViews
+    Sales: () => import('@/components/marketplace/Sales.vue'),
+    Purchases: () => import('@/components/marketplace/Purchases.vue'),
+    Wallet: () => import('@/components/marketplace/Wallet.vue'),
+    Referrals: () => import('@/components/marketplace/Referrals.vue'),
+    SavedOfferings: () => import('@/components/marketplace/SavedOfferings.vue'),
+    MyStore
   },
   data() {
     return {
-      sidebarMenu: '',
+      sidebarMenu: 0,
+      nav: 'My Store',
       items: [
         {
           icon: 'mdi-moon-full',
@@ -115,6 +130,12 @@ export default {
         '#Printing&Prototyping',
         '#Design'
       ]
+    }
+  },
+  methods: {
+    navigate(text) {
+      this.nav = text
+      console.log(this.sidebarMenu)
     }
   }
 }

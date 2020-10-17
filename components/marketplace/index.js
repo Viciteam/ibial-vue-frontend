@@ -1,5 +1,4 @@
-import RecommendedOfferings from './RecommendedOfferings.vue'
-import TopOfferings from './TopOfferings.vue'
-import ToggleViews from './ToggleViews.vue'
+import MyStore from './MyStore.vue'
+import Sales from './Sales.vue'
 
-export { RecommendedOfferings, TopOfferings, ToggleViews }
+export { MyStore, Sales }

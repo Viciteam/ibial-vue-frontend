@@ -72,7 +72,10 @@
   </div>
 </template>
 <script>
-import { RecommendedOfferings, TopOfferings } from '~/components/marketplace'
+import {
+  RecommendedOfferings,
+  TopOfferings
+} from '~/components/marketplace/store'
 
 export default {
   components: {

@@ -23,7 +23,6 @@ import {
 } from '~/components/privatecommunity'
 
 export default {
-  //middleware: 'auth',
   components: {
     ProfileWidget,
     PostsFeed,

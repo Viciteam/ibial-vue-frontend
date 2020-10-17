@@ -24,10 +24,10 @@
           :value="item"
         >
           <v-img
+            v-ripple
             class="my-4 mx-2 elevation-0"
             height="100"
             width="100"
-            v-ripple
             :src="item.img"
             :lazy-src="item.img"
             @click="toggle"

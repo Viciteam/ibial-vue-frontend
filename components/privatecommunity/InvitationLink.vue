@@ -26,7 +26,7 @@
         <v-text-field
           id="tocopy"
           class="caption"
-          value="https://ibial.com/invite?url=123"
+          :value="this.$auth.user.affiliate_link"
           rounded
           outlined
           dense
