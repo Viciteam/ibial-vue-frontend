@@ -41,7 +41,7 @@
         </div>
       </div>
     </v-navigation-drawer>
-    <v-container>
+    <v-container class="index--container">
       <Home />
     </v-container>
     <SignUp :signup="toggleSignUp" @cancelSignup="cancel" />
@@ -117,6 +117,9 @@ export default {
 </script>
 
 <style scoped>
+.index--container {
+  max-width: 1080px;
+}
 .signin__btn:hover,
 .learnmore__btn:hover {
   cursor: pointer;

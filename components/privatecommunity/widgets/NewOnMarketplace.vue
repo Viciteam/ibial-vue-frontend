@@ -2,7 +2,7 @@
   <v-card class="pa-5 box_shadow--default mt-5">
     <v-row class="pt-0 pb-3">
       <v-col class="black--text body-1 font-weight-bold py-0 pr-0">
-        New on the Marketplace
+        New on the Store
       </v-col>
     </v-row>
     <v-row>
