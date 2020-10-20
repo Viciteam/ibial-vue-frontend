@@ -55,11 +55,12 @@
           <v-col>
             <v-chip-group column>
               <v-chip
-                v-for="item in chips"
+                v-for="item in tags"
                 :key="item"
                 color="secondary_background"
                 class="secondary--text"
                 small
+                @click="hashtags(item)"
                 >{{ item }}</v-chip
               >
             </v-chip-group>
@@ -123,7 +124,7 @@ export default {
           count: ''
         }
       ],
-      chips: [
+      tags: [
         '#Network&Communications',
         '#Marketing',
         '#Management',
@@ -135,7 +136,9 @@ export default {
   methods: {
     navigate(text) {
       this.nav = text
-      console.log(this.sidebarMenu)
+    },
+    hashtags(tags) {
+      this.$router.push({ path: '/tags/', query: { tags: tags } })
     }
   }
 }
