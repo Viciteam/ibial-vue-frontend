@@ -98,30 +98,15 @@
 export default {
   data() {
     return {
-      /**
-       * all the datas here
-       */
       isHidePassword: false,
       email: '',
       password: '',
       loading: false
     }
   },
-  computed: {
-    /**
-     * all the computed here
-     */
-  },
-  watch: {
-    /**
-     * all the watchers here
-     */
-  },
-  mounted() {
-    /**
-     * all the mounted here
-     */
-  },
+  computed: {},
+  watch: {},
+  mounted() {},
   methods: {
     /**
      * registration login function will automatically run when user click confirm.
