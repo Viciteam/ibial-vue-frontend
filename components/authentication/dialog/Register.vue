@@ -121,7 +121,7 @@
           x-large
           :disabled="!valid"
           :loading="loading"
-          @click="register"
+          @click="registerCredentials"
         >
           Get Started
         </v-btn>
@@ -185,9 +185,11 @@ export default {
   },
   methods: {
     /**
-     * all the methods here
+     * Register function
+     *
+     * @return  {Promise<void>}        returns object
      */
-    async register() {
+    async registerCredentials() {
       let details = {
         name: this.name,
         email: this.email,
@@ -196,18 +198,17 @@ export default {
       }
       this.loading = true
       try {
-        this.$api.accounts.account.register(details)
-        await this.$auth.loginWith('local', {
-          data: details
-        })
+        await this.$api.accounts.account.register(details)
         const notif = {
           display: true,
           type: 'primary',
-          message: 'Thanks for signing up..'
+          message: 'Successfully registered, Logging in...'
         }
+
         this.$store.dispatch('addNotifications', notif)
-        this.loading = false
         this.$emit('cancelRegister', false)
+
+        this.loginCredentials(details)
       } catch (error) {
         console.log(error)
         const notif = {
@@ -219,6 +220,42 @@ export default {
         this.loading = false
       }
     },
+    /**
+     * After registration login function will automatically run.
+     *
+     * @param   {object}  credentials  credentials from sign up form
+     *
+     * @return  {Promise<void>}        returns object
+     */
+    async loginCredentials(credentials) {
+      let details = {
+        email: credentials.email,
+        password: credentials.password
+      }
+      try {
+        await this.$auth.loginWith('local', {
+          data: details
+        })
+
+        this.loading = false
+        location.reload()
+      } catch (error) {
+        const notif = {
+          display: true,
+          type: 'error',
+          message: 'There was an issue signing in. Please try again.'
+        }
+        this.$store.dispatch('addNotifications', notif)
+        this.loading = false
+      }
+    },
+    /**
+     * toggle signup modal
+     *
+     * @param   {boolean}  value  true or false
+     *
+     * @return  {void}
+     */
     signup(value) {
       this.login = false
       this.$emit('cancelRegister', value)
