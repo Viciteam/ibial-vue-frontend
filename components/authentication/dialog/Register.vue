@@ -9,10 +9,7 @@
       <a
         href="#"
         class="primary--text font-weight-medium text-decoration-none"
-        @click="
-          login = true
-          $emit('cancelRegister', false)
-        "
+        @click="toggleSignup"
         >Sign in</a
       >
     </div>
@@ -206,11 +203,10 @@ export default {
         }
 
         this.$store.dispatch('addNotifications', notif)
-        this.$emit('cancelRegister', false)
+        this.toggleSignup()
 
         this.loginCredentials(details)
       } catch (error) {
-        console.log(error)
         const notif = {
           display: true,
           type: 'error',
@@ -250,7 +246,7 @@ export default {
       }
     },
     /**
-     * toggle signup modal
+     * watch property showSignUp to toggle signup modal
      *
      * @param   {boolean}  value  true or false
      *
@@ -259,6 +255,15 @@ export default {
     signup(value) {
       this.login = false
       this.$emit('cancelRegister', value)
+    },
+    /**
+     * toggle signup modal
+     *
+     * @return  {void}
+     */
+    toggleSignup() {
+      this.login = true
+      this.$emit('cancelRegister', false)
     }
   }
 }
