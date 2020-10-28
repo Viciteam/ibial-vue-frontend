@@ -87,7 +87,7 @@
       <a
         href="#"
         class="primary--text font-weight-medium text-decoration-none"
-        @click="$emit('showSignUp', true)"
+        @click="toggleLogin"
         >Sign up</a
       >
     </div>
@@ -124,7 +124,9 @@ export default {
   },
   methods: {
     /**
-     * all the methods here
+     * registration login function will automatically run when user click confirm.
+     *
+     * @return  {Promise<void>}        returns object
      */
     async login() {
       let details = {
@@ -143,8 +145,9 @@ export default {
         }
         this.$store.dispatch('addNotifications', notif)
         this.loading = false
-        //$router.go({path:this.$route.path, force: true})
         this.$emit('showSignUp', false)
+
+        location.reload()
       } catch (error) {
         const notif = {
           display: true,
@@ -152,9 +155,16 @@ export default {
           message: 'There was an issue signing in. Please try again.'
         }
         this.$store.dispatch('addNotifications', notif)
-        //console.log(error)
         this.loading = false
       }
+    },
+    /**
+     * toggle login modal
+     *
+     * @return  {void}
+     */
+    toggleLogin() {
+      this.$emit('cancelRegister', false)
     }
   }
 }
