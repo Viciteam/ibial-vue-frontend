@@ -148,9 +148,6 @@ export default {
   },
   data() {
     return {
-      /**
-       * all the datas here
-       */
       isHidePassword: false,
       isHideConfirmPassword: false,
       ...validations,
