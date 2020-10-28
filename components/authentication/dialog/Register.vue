@@ -148,9 +148,9 @@ export default {
   },
   data() {
     return {
+      ...validations,
       isHidePassword: false,
       isHideConfirmPassword: false,
-      ...validations,
       valid: true,
       name: '',
       email: '',
