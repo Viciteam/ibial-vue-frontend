@@ -141,7 +141,6 @@
 <script>
 import validations from '@/utils/validations'
 import { Login } from '@/components/authentication/dialog'
-//import axios from 'axios'
 
 export default {
   components: {
@@ -165,26 +164,14 @@ export default {
       loading: false
     }
   },
-  computed: {
-    /**
-     * all the computed here
-     */
-  },
-  watch: {
-    /**
-     * all the watchers here
-     */
-  },
-  mounted() {
-    /**
-     * all the mounted here
-     */
-  },
+  computed: {},
+  watch: {},
+  mounted() {},
   methods: {
     /**
      * Register function
      *
-     * @return  {Promise<void>}        returns object
+     * @return  {Promise<void>}      returns object
      */
     async registerCredentials() {
       let details = {
