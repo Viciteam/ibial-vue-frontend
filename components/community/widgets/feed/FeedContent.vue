@@ -8,7 +8,12 @@
 
 <script>
 export default {
-  props: ['feedContent'],
+  props: {
+    feedContent: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
       /**
