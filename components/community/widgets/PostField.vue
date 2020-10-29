@@ -35,6 +35,7 @@
         color="primary"
         depressed
         rounded
+        :disabled="isPostValid"
         :loading="isLoading"
         @click="createPost"
       >
@@ -64,6 +65,13 @@ export default {
       },
       isLoading: false,
       counter: 0
+    }
+  },
+  computed: {
+    isPostValid() {
+      const content = this.createPostPayload.content
+
+      return content === '' ? true : false
     }
   },
   methods: {

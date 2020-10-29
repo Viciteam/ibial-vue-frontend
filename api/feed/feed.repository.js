@@ -26,6 +26,14 @@ export default ($axios) => ({
     return $axios.$post(`${SOCIAL_URL}/set/post`, payload)
   },
   /**
+   * Update post
+   *
+   * @return  {Promise}
+   */
+  UpdatePost(payload, id) {
+    return $axios.$post(`${SOCIAL_URL}/set/post/${id}`, payload)
+  },
+  /**
    * Delete post by ID
    *
    * @param   {number}  id
