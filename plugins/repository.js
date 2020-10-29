@@ -3,6 +3,7 @@ import BusinessRepository from '~/api/business/business.repository'
 import FeedRepository from '~/api/feed/feed.repository'
 import ProductRepository from '~/api/product/product.repository'
 import SaasRepository from '~/api/saas/saas.repository'
+import TeamsRepository from '~/api/teams/teams.repository'
 export default (ctx, inject) => {
   // dependency injection
   const api = {
@@ -15,5 +16,6 @@ export default (ctx, inject) => {
   inject('feedRepository', FeedRepository(ctx.$axios))
   inject('productRepository', ProductRepository(ctx.$axios))
   inject('saasRepository', SaasRepository(ctx.$axios))
+  inject('teamsRepository', TeamsRepository(ctx.$axios))
   inject('api', api)
 }
