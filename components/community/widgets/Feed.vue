@@ -104,6 +104,12 @@ export default {
     CommentField,
     CommentSection
   },
+  props: {
+    newPost: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
       feed: [],
@@ -119,18 +125,27 @@ export default {
     /**
      * all the watchers here
      */
+    newPost() {
+      setTimeout(() => {
+        this.GetBusinessFeed()
+      }, 1000)
+    }
   },
   mounted() {
-    this.getBusinessFeed()
+    this.GetBusinessFeed()
   },
   methods: {
-    async getBusinessFeed() {
+    /**
+     * Function to get posts
+     *
+     * @return  {Promise<void>}  returns nothing
+     */
+    async GetBusinessFeed() {
       this.isLoading = true
       try {
-        const response = await this.$feedRepository.getFeedByBusiness(1)
+        const response = await this.$feedRepository.GetFeedByBusiness(1)
         this.feed = response.data
 
-        console.log(this.feed, 'feed')
         this.isLoading = false
       } catch (error) {
         // error state
@@ -158,7 +173,7 @@ export default {
         notif.type = 'primary'
         notif.message = 'Successfully deleted posts.'
 
-        this.getBusinessFeed()
+        this.GetBusinessFeed()
       } catch (error) {
         // error state
         notif.type = 'error'
