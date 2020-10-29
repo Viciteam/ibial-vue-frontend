@@ -1,18 +1,18 @@
 <template>
   <div>
     <v-btn icon color="secondary" @click="onClickLikeDislike('like')">
-      <v-avatar tile :size="imported === 'comment' ? '18' : '19'" class="mt-n1">
+      <v-avatar size="19" tile class="mt-n1">
         <v-img
           :src="`/icons/feed/${isLiked ? 'active-like.svg' : 'idle-like.svg'}`"
         ></v-img>
       </v-avatar>
     </v-btn>
     <span class="medium_gray--text body-2 ml-n1 mr-1">
-      {{ reactions.like }}
+      {{ like }}
     </span>
 
     <v-btn icon color="secondary" @click="onClickLikeDislike('dislike')">
-      <v-avatar tile :size="imported === 'comment' ? '18' : '19'" class="mb-n1">
+      <v-avatar size="19" tile class="mb-n1">
         <v-img
           :src="
             `/icons/feed/${
@@ -23,7 +23,7 @@
       </v-avatar>
     </v-btn>
     <span class="medium_gray--text body-2 ml-n1 mr-1">
-      {{ reactions.dislike }}
+      {{ dislike }}
     </span>
 
     <v-btn
@@ -32,7 +32,7 @@
       color="secondary"
       @click="isCommented = !isCommented"
     >
-      <v-avatar tile :size="imported === 'comment' ? '18' : '19'">
+      <v-avatar size="19" tile>
         <v-img
           :src="
             `/icons/feed/${
@@ -51,21 +51,21 @@
 <script>
 export default {
   props: {
-    imported: {
-      type: String,
-      default: null
-    },
     comments: {
       type: Number,
       default: 0
     },
-    reactions: {
-      type: Array,
-      default: null
+    like: {
+      type: Number,
+      default: 0
+    },
+    dislike: {
+      type: Number,
+      default: 0
     },
     showcomment: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data() {
