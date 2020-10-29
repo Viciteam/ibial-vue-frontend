@@ -1,6 +1,7 @@
 <template>
-  <v-card class="box-shadow--default pa-3">
+  <v-card class="box-shadow--default pa-3" width="100%">
     <v-textarea
+      v-model="createPostPayload.content"
       placeholder="Share an update about your work..."
       solo
       flat
@@ -34,6 +35,8 @@
         color="primary"
         depressed
         rounded
+        :loading="isLoading"
+        @click="createPost"
       >
         Post
       </v-btn>
@@ -42,7 +45,80 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    newPost: {
+      type: Number,
+      default: 0
+    }
+  },
+  data() {
+    return {
+      createPostPayload: {
+        user: this.$auth.user.id,
+        position: 'business',
+        position_id: 1,
+        content: '',
+        ispublic: 'public',
+        meta: {}
+      },
+      isLoading: false,
+      counter: 0
+    }
+  },
+  methods: {
+    /**
+     * Create new post
+     *
+     * @return  {Promise}  returns promise
+     */
+    async createPost() {
+      this.isLoading = true
+      let notif = {
+        display: true,
+        type: '',
+        message: ''
+      }
+      // condition here
+      this.emitNewPost()
+      try {
+        await this.$feedRepository.CreatePost(this.createPostPayload)
+
+        this.isLoading = false
+        this.clearInputs()
+
+        notif.type = 'primary'
+        notif.message = 'Successfully deleted posts.'
+      } catch (error) {
+        this.isLoading = false
+
+        notif.type = 'error'
+        notif.message = 'There was a problem while processing your data.'
+      }
+
+      this.$store.dispatch('addNotifications', notif)
+    },
+    /**
+     * Clear all inputs
+     *
+     * @return  {void}  returns nothing
+     */
+    clearInputs() {
+      this.createPostPayload.content = ''
+      this.createPostPayload.meta = {}
+    },
+    /**
+     * Emit back if have new post
+     *
+     * @return  {void}  returns nothing
+     */
+    emitNewPost() {
+      this.counter++
+
+      this.$emit('newPost', this.counter)
+    }
+  }
+}
 </script>
 
 <style>

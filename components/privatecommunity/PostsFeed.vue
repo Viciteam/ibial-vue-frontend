@@ -32,7 +32,13 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-divider v-if="this.$auth.loggedIn" class="mt-6"></v-divider>
+
+    <v-row no-gutters class="mt-5">
+      <PostField @newPost="announceNewPost" />
+    </v-row>
+
+    <v-divider class="mt-6"></v-divider>
+
     <v-row v-if="this.$auth.loggedIn">
       <v-col class="caption">
         Personalize your feed:
@@ -50,19 +56,31 @@
         </v-btn>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col class="py-0">
-        <Feed />
+        <Feed :new-post="counter" />
       </v-col>
     </v-row>
   </div>
 </template>
 <script>
-import Feed from '~/components/community/widgets/Feed.vue'
+import { Feed, PostField } from '@/components/community/widgets'
 
 export default {
   components: {
-    Feed
+    Feed,
+    PostField
+  },
+  data() {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    announceNewPost(val) {
+      this.counter = val
+    }
   }
 }
 </script>

@@ -10,8 +10,8 @@
 export default {
   props: {
     feedContent: {
-      type: Object,
-      default: null
+      type: String,
+      default: ''
     }
   },
   data() {
