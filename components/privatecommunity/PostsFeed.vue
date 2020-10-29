@@ -32,7 +32,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-divider class="mt-6"></v-divider>
+    <v-divider v-if="this.$auth.loggedIn" class="mt-6"></v-divider>
     <v-row v-if="this.$auth.loggedIn">
       <v-col class="caption">
         Personalize your feed:

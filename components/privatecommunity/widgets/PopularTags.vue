@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-5 box_shadow--default mt-5">
+  <v-card class="pa-5 box_shadow--default mt-3">
     <v-row class="pt-0 pb-3">
       <v-col cols="9" class="black--text body-1 font-weight-bold py-0">
         Popular Tags
