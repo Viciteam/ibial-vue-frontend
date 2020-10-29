@@ -35,7 +35,21 @@
                 </v-list-item-icon>
               </template>
               <v-list width="200">
-                <v-list-item link @click="deletePost(item)">
+                <!-- <v-list-item link @click="updatePost(item)">
+                  <v-list-item-title>
+                    Update Post
+                  </v-list-item-title>
+                </v-list-item> -->
+                <v-list-item link>
+                  <v-list-item-title>
+                    Lorem Ipsum
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item
+                  v-if="$auth.user.id.toString() === item.user"
+                  link
+                  @click="deletePost(item)"
+                >
                   <v-list-item-title class="red--text">
                     Delete Post
                   </v-list-item-title>
@@ -113,7 +127,15 @@ export default {
   data() {
     return {
       feed: [],
-      isLoading: false
+      isLoading: false,
+      isUpdatePostLoading: false,
+      updatePostPayload: {
+        user: this.$auth.user.id,
+        position: '',
+        position_id: 0,
+        content: '',
+        ispublic: ''
+      }
     }
   },
   computed: {
@@ -169,6 +191,36 @@ export default {
 
       try {
         await this.$feedRepository.DeletePostById(item.id)
+
+        notif.type = 'primary'
+        notif.message = 'Successfully deleted posts.'
+
+        this.GetBusinessFeed()
+      } catch (error) {
+        // error state
+        notif.type = 'error'
+        notif.message = 'There was a problem while processing your data.'
+      }
+
+      this.$store.dispatch('addNotifications', notif)
+    },
+
+    /**
+     * Update Post by ID
+     *
+     * @param   {object}  item    item per posts
+     *
+     * @return  {Promise<void>}   returns promise
+     */
+    async updatePost(item) {
+      let notif = {
+        display: true,
+        type: '',
+        message: ''
+      }
+
+      try {
+        await this.$feedRepository.UpdatePost(this.updatePostPayload, item.id)
 
         notif.type = 'primary'
         notif.message = 'Successfully deleted posts.'
