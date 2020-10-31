@@ -19,11 +19,12 @@
       class="column-container--padding"
     >
       <v-img
-        max-height="240"
+        :max-height="media.length < 3 ? '450' : '240'"
+        :height="media.length < 3 ? '480' : '240'"
         :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
         :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
         aspect-ratio="1"
-        class="grey lighten-2"
+        class="grey lighten-2 rounded-lg"
       ></v-img>
     </v-col>
   </v-row>

@@ -79,7 +79,9 @@ export default {
   },
   methods: {
     announceNewPost(val) {
-      this.counter = val
+      setTimeout(() => {
+        this.counter = val
+      }, 1000)
     }
   }
 }

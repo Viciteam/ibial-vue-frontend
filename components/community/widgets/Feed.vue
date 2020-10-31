@@ -154,9 +154,7 @@ export default {
      * all the watchers here
      */
     newPost() {
-      setTimeout(() => {
-        this.GetBusinessFeed()
-      }, 1000)
+      this.GetBusinessFeed()
     }
   },
   mounted() {

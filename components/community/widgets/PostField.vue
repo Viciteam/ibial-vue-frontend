@@ -17,7 +17,7 @@
       class="d-none"
       type="file"
       multiple
-      accept="application/*, image/*, video/*, audio/*, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .txt"
+      accept="application/*, image/*, .jpeg, .jpg, video/*, audio/*, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .txt"
       @change="fileInputChanged"
     />
 
@@ -34,6 +34,7 @@
             class="light_gray d-flex align-content-center justify-content-center"
             height="100%"
             min-height="60"
+            :disabled="isLoading"
           >
             <v-img
               v-if="item.type.includes('image/')"
@@ -181,11 +182,7 @@ export default {
      */
     async createPost() {
       this.isLoading = true
-      let notif = {
-        display: true,
-        type: '',
-        message: ''
-      }
+
       // condition here
       this.emitNewPost()
       try {
@@ -194,16 +191,20 @@ export default {
         this.isLoading = false
         this.clearInputs()
 
-        notif.type = 'primary'
-        notif.message = 'Successfully created posts.'
+        this.$store.dispatch('addNotifications', {
+          display: true,
+          type: 'primary',
+          message: 'Successfully created posts.'
+        })
       } catch (error) {
         this.isLoading = false
 
-        notif.type = 'error'
-        notif.message = 'There was a problem while processing your data.'
+        this.$store.dispatch('addNotifications', {
+          display: true,
+          type: 'error',
+          message: 'There was a problem while processing your data.'
+        })
       }
-
-      this.$store.dispatch('addNotifications', notif)
     },
     /**
      * Clear all inputs
@@ -216,6 +217,8 @@ export default {
 
       this.uploadedFiles = []
       this.previewFiles = []
+
+      this.$refs.uploadedFiles.value = null
     },
     /**
      * Emit back if have new post
@@ -302,14 +305,12 @@ export default {
       } catch (error) {
         this.isLoading = false
 
-        let notif = {
+        this.$store.dispatch('addNotifications', {
           display: true,
           type: 'error',
           message:
             'Error uploading file. Please check if the files are valid, or contact technical support.'
-        }
-
-        this.$store.dispatch('addNotifications', notif)
+        })
       }
     }
   }
