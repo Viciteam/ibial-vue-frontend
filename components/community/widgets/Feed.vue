@@ -62,6 +62,10 @@
         <div class="px-4 pt-2 pb-4">
           <FeedContent :feed-content="item.content" />
 
+          <v-card v-if="item.media" flat width="100%">
+            <Media :media="item.media ? item.media : []" />
+          </v-card>
+
           <Hashtag :tags="item.tag" :template="'chips'" />
         </div>
 
@@ -103,7 +107,8 @@ import {
   FeedContent,
   PostReactions,
   CommentField,
-  CommentSection
+  CommentSection,
+  Media
 } from './feed/index'
 import Hashtag from './Hashtag'
 
@@ -116,7 +121,8 @@ export default {
     FeedContent,
     PostReactions,
     CommentField,
-    CommentSection
+    CommentSection,
+    Media
   },
   props: {
     newPost: {

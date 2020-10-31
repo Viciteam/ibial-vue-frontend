@@ -12,15 +12,105 @@
     >
     </v-textarea>
 
+    <input
+      ref="fileInput"
+      class="d-none"
+      type="file"
+      multiple
+      accept="application/*, image/*, video/*, audio/*, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .txt"
+      @change="fileInputChanged"
+    />
+
+    <v-row class="px-4">
+      <v-col
+        v-for="(item, i) in previewFiles.slice(0, 4)"
+        :key="i"
+        cols="3"
+        class="pa-2"
+      >
+        <v-hover v-slot="{ hover }">
+          <v-card
+            flat
+            class="light_gray d-flex align-content-center justify-content-center"
+            height="100%"
+            min-height="60"
+          >
+            <v-img
+              v-if="item.type.includes('image/')"
+              :src="item.file"
+              max-height="60"
+              contain
+            ></v-img>
+
+            <v-btn
+              v-if="item.type.includes('video/') && !hover"
+              icon
+              :ripple="false"
+              class="d-block mx-auto align-self-center primary--transparent"
+            >
+              <v-icon size="20" class="rounded-lg" color="primary">
+                mdi-file-video
+              </v-icon>
+            </v-btn>
+
+            <v-btn
+              v-if="item.type.includes('application/') && !hover"
+              icon
+              :ripple="false"
+              class="d-block mx-auto align-self-center primary--transparent"
+            >
+              <v-icon size="20" class="rounded-lg" color="primary">
+                mdi-file
+              </v-icon>
+            </v-btn>
+
+            <v-btn
+              v-if="item.type.includes('audio/') && !hover"
+              icon
+              :ripple="false"
+              class="d-block mx-auto align-self-center primary--transparent"
+            >
+              <v-icon size="20" class="rounded-lg" color="primary">
+                mdi-file-music
+              </v-icon>
+            </v-btn>
+
+            <v-overlay v-if="i < 3" absolute :value="hover" color="transparent">
+              <v-btn
+                v-if="hover"
+                icon
+                class="d-block mx-auto align-self-center error--transparent"
+                @click="removeAttachment(i)"
+              >
+                <v-icon size="20" class="rounded-lg" color="error">
+                  mdi-close
+                </v-icon>
+              </v-btn>
+            </v-overlay>
+
+            <v-overlay v-if="i === 3" absolute>
+              <v-btn
+                v-if="previewFiles.length > 4"
+                icon
+                class="d-block mx-auto align-self-center white--transparent"
+              >
+                <span>+{{ previewFiles.slice(4, 1000).length }}</span>
+              </v-btn>
+            </v-overlay>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
+
     <v-row no-gutters align="center">
       <v-btn-toggle color="primary" tile group>
-        <v-btn icon class="ma-0 rounded-lg">
+        <v-btn icon class="ma-0 rounded-lg" @click="clickInput">
           <v-icon>mdi-paperclip</v-icon>
         </v-btn>
         <v-btn icon class="ma-0 rounded-lg">
           <v-icon>mdi-format-list-bulleted</v-icon>
         </v-btn>
-        <v-btn icon class="ma-0 rounded-lg">
+        <v-btn icon class="ma-0 rounded-lg" @click="clickInput">
           <v-icon>mdi-image-outline</v-icon>
         </v-btn>
         <v-btn icon class="ma-0 rounded-lg">
@@ -61,17 +151,26 @@ export default {
         position_id: 1,
         content: '',
         ispublic: 'public',
-        meta: {}
+        meta: {
+          attachment: [],
+          media: []
+        }
       },
       isLoading: false,
-      counter: 0
+      counter: 0,
+      uploadedFiles: [],
+      previewFiles: [],
+      appFiles: [],
+      videoFiles: [],
+      imageFiles: []
     }
   },
   computed: {
     isPostValid() {
       const content = this.createPostPayload.content
+      const file = this.uploadedFiles.length
 
-      return content === '' ? true : false
+      return content === '' && file === 0
     }
   },
   methods: {
@@ -96,7 +195,7 @@ export default {
         this.clearInputs()
 
         notif.type = 'primary'
-        notif.message = 'Successfully deleted posts.'
+        notif.message = 'Successfully created posts.'
       } catch (error) {
         this.isLoading = false
 
@@ -114,6 +213,9 @@ export default {
     clearInputs() {
       this.createPostPayload.content = ''
       this.createPostPayload.meta = {}
+
+      this.uploadedFiles = []
+      this.previewFiles = []
     },
     /**
      * Emit back if have new post
@@ -124,6 +226,91 @@ export default {
       this.counter++
 
       this.$emit('newPost', this.counter)
+    },
+    /**
+     * File Upload
+     */
+
+    /**
+     * Clicks actual input file
+     */
+    clickInput() {
+      this.$refs.fileInput.click()
+    },
+
+    /**
+     * Triggers when input is updated, appends to uploadedFiles variable for cumulative files
+     */
+    fileInputChanged() {
+      const files = this.$refs.fileInput.files
+      if (!files.length) return
+      for (const file of files) {
+        this.uploadedFiles.push(file)
+
+        this.previewFiles.push({
+          file: URL.createObjectURL(file),
+          type: file.type
+        })
+      }
+
+      this.filterFiles()
+    },
+    /**
+     * Remove queue file attachments
+     *
+     * @return
+     */
+    removeAttachment(i) {
+      this.uploadedFiles.splice(i, i + 1)
+      this.previewFiles.splice(i, i + 1)
+    },
+
+    /**
+     * filter files
+     *
+     * @return
+     */
+    filterFiles() {
+      if (this.uploadedFiles.length !== 0) {
+        for (let i = 0; i < this.uploadedFiles.length; i++) {
+          const file = this.uploadedFiles[i]
+          if (file.type.includes('application/')) {
+            this.uploadFiles(file, 'store-file')
+          } else if (file.type.includes('video/')) {
+            this.uploadFiles(file, 'store-video')
+          } else if (file.type.includes('image/')) {
+            this.uploadFiles(file, 'store-image')
+          } else if (file.type.includes('audio/')) {
+            this.uploadFiles(file, 'store-audio')
+          }
+        }
+      }
+    },
+    /**
+     * Files Types
+     */
+    async uploadFiles(file, uploadType) {
+      this.isLoading = true
+      try {
+        const response = await this.$mediaRepository.UploadFiles(uploadType, {
+          user_id: this.$auth.user.id,
+          file: file
+        })
+        this.isLoading = false
+
+        this.createPostPayload.meta.media.push(response.file)
+      } catch (error) {
+        this.isLoading = false
+
+        let notif = {
+          display: true,
+          type: 'error',
+          message:
+            'Error uploading file. Please check if the files are valid, or contact technical support.'
+        }
+
+        this.$store.dispatch('addNotifications', notif)
+      }
     }
   }
 }
@@ -133,5 +320,9 @@ export default {
 #app .textArea--line-height-normal textarea {
   line-height: 1.5;
   margin-top: 5px;
+}
+#app .media-position--contain {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>

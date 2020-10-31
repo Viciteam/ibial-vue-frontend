@@ -49,6 +49,10 @@
   background: rgba(85, 201, 173, 0.3);
 }
 
+#app .error--transparent {
+  background: rgba(201, 85, 85, 0.3);
+}
+
 #app .secondary--fade {
   background-color: #ebeff9;
 }
