@@ -19,10 +19,8 @@
             <v-img src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
           </v-avatar>
         </div>
-
-        <v-btn text color="primary" class="text-capitalize mt-2 ml-n3"
-          >View All Members (20)</v-btn
-        >
+        <AddMember />
+        <AddPeople />
       </v-card>
     </v-flex>
 
@@ -59,7 +57,15 @@
   </v-layout>
 </template>
 <script>
-export default {}
+import AddPeople from './addPeopleModal'
+import AddMember from './viewMembersModal'
+export default {
+  components: {
+    AddPeople,
+    AddMember
+  },
+  data() {}
+}
 </script>
 
 <style scoped>
