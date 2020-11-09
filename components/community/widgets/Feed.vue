@@ -88,6 +88,7 @@
             :like="item.reaction.like"
             :dislike="item.reaction.dislike"
             :comments="item.comments.length"
+            :post="item"
             class="py-3"
           />
 

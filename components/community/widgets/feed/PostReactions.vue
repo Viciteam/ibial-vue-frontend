@@ -63,6 +63,10 @@ export default {
       type: Number,
       default: 0
     },
+    post: {
+      type: Object,
+      default: null
+    },
     showcomment: {
       type: Boolean,
       default: false
@@ -100,9 +104,23 @@ export default {
      *
      * @return  {void}
      */
-    likeFeed() {
+    async likeFeed() {
       this.isLiked = true
       this.isDisliked = false
+
+      const payload = {
+        user: this.$auth.user.id,
+        post: this.post.id,
+        reaction: 'like'
+      }
+
+      try {
+        await this.$feedRepository.CreateSentiments(payload)
+
+        this.like += 1
+      } catch (error) {
+        // error
+      }
     },
 
     /**
@@ -110,9 +128,23 @@ export default {
      *
      * @return  {void}
      */
-    dislikeFeed() {
+    async dislikeFeed() {
       this.isLiked = false
       this.isDisliked = true
+
+      const payload = {
+        user: this.$auth.user.id,
+        post: this.post.id,
+        reaction: 'dislike'
+      }
+
+      try {
+        await this.$feedRepository.CreateSentiments(payload)
+
+        this.dislike += 1
+      } catch (error) {
+        // error
+      }
     }
   }
 }

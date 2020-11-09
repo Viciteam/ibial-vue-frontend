@@ -18,7 +18,7 @@
       type="file"
       multiple
       accept="application/*, image/*, .jpeg, .jpg, video/*, audio/*, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .txt"
-      @change="fileInputChanged"
+      @change="fileInputChanged('123')"
     />
 
     <v-row class="px-4">
@@ -89,9 +89,8 @@
               </v-btn>
             </v-overlay>
 
-            <v-overlay v-if="i === 3" absolute>
+            <v-overlay v-if="i === 3 && previewFiles.length > 4" absolute>
               <v-btn
-                v-if="previewFiles.length > 4"
                 icon
                 class="d-block mx-auto align-self-center white--transparent"
               >
@@ -169,7 +168,7 @@ export default {
   computed: {
     isPostValid() {
       const content = this.createPostPayload.content
-      const file = this.uploadedFiles.length
+      const file = this.previewFiles.length
 
       return content === '' && file === 0
     }
@@ -186,16 +185,20 @@ export default {
       // condition here
       this.emitNewPost()
       try {
-        await this.$feedRepository.CreatePost(this.createPostPayload)
+        const response = await this.$feedRepository.CreatePost(
+          this.createPostPayload
+        )
 
-        this.isLoading = false
-        this.clearInputs()
+        if (response.status === 200) {
+          this.isLoading = false
+          this.clearInputs()
 
-        this.$store.dispatch('addNotifications', {
-          display: true,
-          type: 'primary',
-          message: 'Successfully created posts.'
-        })
+          this.$store.dispatch('addNotifications', {
+            display: true,
+            type: 'primary',
+            message: 'Successfully created posts.'
+          })
+        }
       } catch (error) {
         this.isLoading = false
 
@@ -213,12 +216,13 @@ export default {
      */
     clearInputs() {
       this.createPostPayload.content = ''
-      this.createPostPayload.meta = {}
+      this.createPostPayload.meta.media = []
+      this.createPostPayload.meta.attachment = []
 
       this.uploadedFiles = []
       this.previewFiles = []
 
-      this.$refs.uploadedFiles.value = null
+      this.$refs.fileInput.value = null
     },
     /**
      * Emit back if have new post
@@ -266,6 +270,10 @@ export default {
     removeAttachment(i) {
       this.uploadedFiles.splice(i, i + 1)
       this.previewFiles.splice(i, i + 1)
+
+      this.createPostPayload.meta.media.splice(i, i + 1)
+
+      this.$refs.fileInput.value = null
     },
 
     /**
@@ -273,9 +281,11 @@ export default {
      *
      * @return
      */
-    filterFiles() {
+    async filterFiles() {
       if (this.uploadedFiles.length !== 0) {
         for (let i = 0; i < this.uploadedFiles.length; i++) {
+          this.isLoading = true
+
           const file = this.uploadedFiles[i]
           if (file.type.includes('application/')) {
             this.uploadFiles(file, 'store-file')
@@ -294,27 +304,36 @@ export default {
      */
     async uploadFiles(file, uploadType) {
       this.isLoading = true
+
       try {
         const response = await this.$mediaRepository.UploadFiles(uploadType, {
           user_id: this.$auth.user.id,
           file: file
         })
-        this.isLoading = false
 
-        this.createPostPayload.meta.media.push(response.file)
-      } catch (error) {
-        this.isLoading = false
+        const media = this.createPostPayload.meta.media
 
-        // clear uploaded files
+        media.push(response.file)
+
         this.uploadedFiles = []
-        this.previewFiles = []
 
+        this.$refs.fileInput.value = null
+
+        if (media.length === this.previewFiles.length) {
+          this.isLoading = false
+        }
+      } catch (error) {
         this.$store.dispatch('addNotifications', {
           display: true,
           type: 'error',
           message:
             'Error uploading file. Please check if the files are valid, or contact technical support.'
         })
+
+        // clear uploaded files
+        this.uploadedFiles = []
+        this.previewFiles = []
+        this.isLoading = false
       }
     }
   }

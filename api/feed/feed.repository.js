@@ -50,5 +50,13 @@ export default ($axios) => ({
    */
   CreateComment(payload) {
     return $axios.$post(`${SOCIAL_URL}/set/post`, payload)
+  },
+  /**
+   * create sentiments
+   *
+   * @return  {Promise}
+   */
+  CreateSentiments(payload) {
+    return $axios.$post(`${SOCIAL_URL}/set/react`, payload)
   }
 })
