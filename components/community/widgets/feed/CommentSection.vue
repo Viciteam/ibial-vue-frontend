@@ -65,7 +65,7 @@
             </v-card>
           </v-card>
         </div>
-        <CommentField />
+        <CommentField :details="post" :level="2" @updated="1" />
       </v-card>
     </v-card>
   </div>
@@ -86,34 +86,16 @@ export default {
     feedComments: {
       type: Array,
       default: null
+    },
+    post: {
+      type: Object,
+      default: null
     }
-  },
-  data() {
-    return {
-      /**
-       * all the datas here
-       */
-    }
-  },
-  computed: {
-    /**
-     * all the computed here
-     */
-  },
-  watch: {
-    /**
-     * all the watchers here
-     */
-  },
-  mounted() {
-    /**
-     * all the mounted here
-     */
   },
   methods: {
-    /**
-     * all the methods here
-     */
+    pushNewComment(item) {
+      console.log(item)
+    }
   }
 }
 </script>

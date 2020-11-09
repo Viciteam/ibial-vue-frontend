@@ -1,8 +1,11 @@
 <template>
   <div>
-    <p class="font-weight-medium black--text body-2">
+    <pre
+      class="font-weight-medium black_gray--text body-1 content__pre--component content__line-height--default"
+    >
       {{ feedContent }}
-    </p>
+      </pre
+    >
   </div>
 </template>
 
@@ -17,29 +20,38 @@ export default {
   data() {
     return {
       /**
-       * all the datas here
+       *
        */
     }
   },
   computed: {
     /**
-     * all the computed here
+     *
      */
   },
   watch: {
     /**
-     * all the watchers here
+     *
      */
   },
   mounted() {
     /**
-     * all the mounted here
+     *
      */
   },
   methods: {
     /**
-     * all the methods here
+     *
      */
   }
 }
 </script>
+
+<style scoped>
+.content__pre--component {
+  white-space: pre-line;
+}
+.content__line-height--default {
+  line-height: 1.4;
+}
+</style>

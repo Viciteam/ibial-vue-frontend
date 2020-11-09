@@ -31,7 +31,7 @@ export default ($axios) => ({
    * @return  {Promise}
    */
   UpdatePost(payload, id) {
-    return $axios.$post(`${SOCIAL_URL}/set/post/${id}`, payload)
+    return $axios.$post(`${SOCIAL_URL}/update/post/${id}`, payload)
   },
   /**
    * Delete post by ID
@@ -42,5 +42,13 @@ export default ($axios) => ({
    */
   DeletePostById(id) {
     return $axios.$delete(`${SOCIAL_URL}/delete/post/${id}`)
+  },
+  /**
+   * Post Comment
+   *
+   * @return  {Promise}
+   */
+  CreateComment(payload) {
+    return $axios.$post(`${SOCIAL_URL}/set/post`, payload)
   }
 })

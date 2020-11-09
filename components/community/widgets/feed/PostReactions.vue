@@ -78,21 +78,6 @@ export default {
       isCommented: false
     }
   },
-  computed: {
-    /**
-     * all the computed here
-     */
-  },
-  watch: {
-    /**
-     * all the watchers here
-     */
-  },
-  mounted() {
-    /**
-     * all the mounted here
-     */
-  },
   methods: {
     /**
      * check if like and dislike then toggle true or false to like or dislike

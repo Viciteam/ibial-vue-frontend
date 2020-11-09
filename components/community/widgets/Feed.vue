@@ -35,14 +35,18 @@
                 </v-list-item-icon>
               </template>
               <v-list width="200">
-                <!-- <v-list-item link @click="updatePost(item)">
-                  <v-list-item-title>
-                    Update Post
-                  </v-list-item-title>
-                </v-list-item> -->
                 <v-list-item link>
                   <v-list-item-title>
                     Lorem Ipsum
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item
+                  v-if="$auth.user.id.toString() === item.user"
+                  link
+                  @click="isFeedUpdate = !isFeedUpdate"
+                >
+                  <v-list-item-title>
+                    Update Post
                   </v-list-item-title>
                 </v-list-item>
                 <v-list-item
@@ -60,7 +64,13 @@
         </v-list>
 
         <div class="px-4 pt-2 pb-4">
-          <FeedContent :feed-content="item.content" />
+          <FeedContent v-if="!isFeedUpdate" :feed-content="item.content" />
+
+          <UpdateField
+            v-if="isFeedUpdate"
+            :post="item"
+            @updated="getNewBusinessFeed"
+          />
 
           <v-card v-if="item.media" flat width="100%">
             <Media :media="item.media ? item.media : []" />
@@ -94,8 +104,9 @@
         </v-row>
 
         <div class="px-4">
-          <CommentField />
-          <CommentSection :feed-comments="item.comments" />
+          <CommentField :post="item" :level="1" @updated="1" />
+
+          <CommentSection :post="item" :feed-comments="item.comments" />
         </div>
       </v-card>
     </div>
@@ -108,7 +119,8 @@ import {
   PostReactions,
   CommentField,
   CommentSection,
-  Media
+  Media,
+  UpdateField
 } from './feed/index'
 import Hashtag from './Hashtag'
 
@@ -122,7 +134,8 @@ export default {
     PostReactions,
     CommentField,
     CommentSection,
-    Media
+    Media,
+    UpdateField
   },
   props: {
     newPost: {
@@ -135,13 +148,7 @@ export default {
       feed: [],
       isLoading: false,
       isUpdatePostLoading: false,
-      updatePostPayload: {
-        user: this.$auth.user.id,
-        position: '',
-        position_id: 0,
-        content: '',
-        ispublic: ''
-      }
+      isFeedUpdate: false
     }
   },
   computed: {
@@ -154,11 +161,11 @@ export default {
      * all the watchers here
      */
     newPost() {
-      this.GetBusinessFeed()
+      this.getBusinessFeed()
     }
   },
   mounted() {
-    this.GetBusinessFeed()
+    this.getBusinessFeed()
   },
   methods: {
     /**
@@ -166,8 +173,9 @@ export default {
      *
      * @return  {Promise<void>}  returns nothing
      */
-    async GetBusinessFeed() {
+    async getBusinessFeed() {
       this.isLoading = true
+
       try {
         const response = await this.$feedRepository.GetFeedByBusiness(1)
         this.feed = response.data
@@ -177,6 +185,17 @@ export default {
         // error state
         this.isLoading = false
       }
+    },
+
+    /**
+     * after emitting update this function will trigger business feed
+     *
+     * @return  {function}
+     */
+    getNewBusinessFeed() {
+      this.isFeedUpdate = false
+
+      this.getBusinessFeed()
     },
 
     /**
@@ -199,37 +218,7 @@ export default {
         notif.type = 'primary'
         notif.message = 'Successfully deleted posts.'
 
-        this.GetBusinessFeed()
-      } catch (error) {
-        // error state
-        notif.type = 'error'
-        notif.message = 'There was a problem while processing your data.'
-      }
-
-      this.$store.dispatch('addNotifications', notif)
-    },
-
-    /**
-     * Update Post by ID
-     *
-     * @param   {object}  item    item per posts
-     *
-     * @return  {Promise<void>}   returns promise
-     */
-    async updatePost(item) {
-      let notif = {
-        display: true,
-        type: '',
-        message: ''
-      }
-
-      try {
-        await this.$feedRepository.UpdatePost(this.updatePostPayload, item.id)
-
-        notif.type = 'primary'
-        notif.message = 'Successfully deleted posts.'
-
-        this.GetBusinessFeed()
+        this.getBusinessFeed()
       } catch (error) {
         // error state
         notif.type = 'error'

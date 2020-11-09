@@ -305,6 +305,10 @@ export default {
       } catch (error) {
         this.isLoading = false
 
+        // clear uploaded files
+        this.uploadedFiles = []
+        this.previewFiles = []
+
         this.$store.dispatch('addNotifications', {
           display: true,
           type: 'error',
