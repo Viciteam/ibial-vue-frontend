@@ -20,7 +20,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@simmo/task": "0.0.1",
     "consola": "^2.15.0",
-    "moment": "2.23.0",
+    "moment": "2.29.4",
     "nuxt": "^2.0.0",
     "socket.io": "^2.3.0",
     "vue-socket.io": "^3.0.10"
