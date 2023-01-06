@@ -21,7 +21,7 @@
     "@simmo/task": "0.0.1",
     "consola": "^2.15.0",
     "moment": "2.23.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "socket.io": "^2.3.0",
     "vue-socket.io": "^3.0.10"
   },
